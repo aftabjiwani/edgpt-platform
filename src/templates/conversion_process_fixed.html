@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converting Your Website to EdGPT</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .conversion-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 40px auto;
+            max-width: 800px;
+            overflow: hidden;
+        }
+        
+        .conversion-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .conversion-content {
+            padding: 40px;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .stat-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4a5568;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: #718096;
+        }
+        
+        .vs-container {
+            position: relative;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .vs-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .vs-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e2e8f0;
+            z-index: 1;
+        }
+        
+        .account-form {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .success-container {
+            display: none;
+            text-align: center;
+        }
+        
+        .success-icon {
+            font-size: 5rem;
+            color: #48bb78;
+            margin-bottom: 20px;
+        }
+        
+        .gptsite-url {
+            background: #f0fff4;
+            border: 1px solid #c6f6d5;
+            color: #2f855a;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+        
+        .transition-slide {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .conversion-container {
+                margin: 20px;
+            }
+            
+            .conversion-header, .conversion-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <a href="/" class="inline-flex items-center text-white hover:text-gray-200 transition-colors">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Back to Home
+            </a>
+        </div>
+        
+        <div class="conversion-container">
+            <div class="conversion-header">
+                <h1 class="text-3xl font-bold mb-4">Converting Your Website to EdGPT</h1>
+                <p class="text-lg opacity-90">Transforming <span id="schoolName">your school</span> website into an intelligent AI assistant</p>
+            </div>
+            
+            <div class="conversion-content">
+                <!-- Progress Bar -->
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-sm font-semibold text-gray-700">Conversion Progress</span>
+                        <span class="text-sm font-semibold text-gray-700"><span id="progressPercent">0</span>% Complete</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                    <p class="text-sm text-gray-600 mt-2" id="statusMessage">Initializing conversion process...</p>
+                </div>
+                
+                <!-- Transition Slides -->
+                <div class="transition-slides">
+                    <!-- Slide 1: Website Stats -->
+                    <div class="transition-slide" id="slide1">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Did You Know?</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="stat-card">
+                                <div class="stat-number text-red-600">94.8%</div>
+                                <div class="stat-label">of websites fail users with accessibility barriers</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number text-green-600">100%</div>
+                                <div class="stat-label">of GPTsites are accessible to all users</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2: Navigation vs Conversation -->
+                    <div class="transition-slide" id="slide2">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Navigation vs Conversation</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="stat-card bg-red-50">
+                                <h3 class="font-bold text-red-800 mb-2">Traditional Websites</h3>
+                                <ul class="text-sm text-red-700 space-y-2">
+                                    <li>• Complex navigation menus</li>
+                                    <li>• Users must hunt for information</li>
+                                    <li>• One-to-many communication</li>
+                                    <li>• Static content that quickly outdates</li>
+                                </ul>
+                            </div>
+                            <div class="stat-card bg-green-50">
+                                <h3 class="font-bold text-green-800 mb-2">Your GPTsite</h3>
+                                <ul class="text-sm text-green-700 space-y-2">
+                                    <li>• Simple conversation interface</li>
+                                    <li>• Direct answers to questions</li>
+                                    <li>• One-to-one personalized support</li>
+                                    <li>• Dynamic content that evolves</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="vs-container">
+                            <div class="vs-line"></div>
+                            <div class="vs-circle">VS</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3: Business Impact -->
+                    <div class="transition-slide" id="slide3">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Business Impact</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="stat-card">
+                                <div class="stat-number text-red-600">$6.9B</div>
+                                <div class="stat-label">lost annually due to poor websites</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-number text-green-600">40%</div>
+                                <div class="stat-label">more inquiries with GPTsite</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4: AI Receptionist -->
+                    <div class="transition-slide" id="slide4">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Why Your School Needs an AI Receptionist</h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="stat-card">
+                                <i class="fas fa-chart-line text-blue-500 text-2xl mb-2"></i>
+                                <h3 class="font-bold">40% More Inquiries</h3>
+                                <p class="text-sm text-gray-600">AI captures family inquiries that would otherwise be lost</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-clock text-blue-500 text-2xl mb-2"></i>
+                                <h3 class="font-bold">24/7 Availability</h3>
+                                <p class="text-sm text-gray-600">Never miss a potential family inquiry again</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-bolt text-blue-500 text-2xl mb-2"></i>
+                                <h3 class="font-bold">Instant Responses</h3>
+                                <p class="text-sm text-gray-600">No more waiting for callbacks or emails</p>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fas fa-bullseye text-blue-500 text-2xl mb-2"></i>
+                                <h3 class="font-bold">Better Support</h3>
+                                <p class="text-sm text-gray-600">AI pre-qualifies inquiries before human follow-up</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Account Creation Form -->
+                <div class="account-form" id="accountForm">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Create Your Account</h2>
+                    <p class="text-gray-600 mb-6">Your website has been successfully processed! Create your account to access your GPTsite.</p>
+                    
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required placeholder="Choose a username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Choose a secure password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                    </div>
+                    
+                    <button type="button" class="submit-btn" id="createAccountBtn">
+                        Create Account & Launch GPTsite
+                    </button>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="success-container" id="successContainer">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Your GPTsite is Ready!</h2>
+                    <p class="text-gray-600 mb-6">Your website has been successfully transformed into an intelligent AI assistant.</p>
+                    
+                    <div class="gptsite-url" id="gpsiteUrl">
+                        https://edgpt.ai/sites/your-school
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                        <a href="#" id="dashboardLink" class="submit-btn bg-blue-600 hover:bg-blue-700">
+                            Go to Dashboard
+                        </a>
+                        <a href="#" id="gpsiteLink" class="submit-btn bg-green-600 hover:bg-green-700">
+                            View Your GPTsite
+                        </a>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h3 class="font-bold text-gray-800 mb-2">Want to use a custom domain?</h3>
+                        <div class="form-group">
+                            <input type="text" id="customDomain" name="customDomain" placeholder="yourschool.edu">
+                        </div>
+                        <button type="button" class="submit-btn bg-purple-600 hover:bg-purple-700" id="setupDomainBtn">
+                            Set Up Custom Domain
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get conversion ID from the server
+        const conversionId = '{{ conversion_id }}';
+        let currentSlide = 1;
+        let totalSlides = 4;
+        let accountReady = false;
+        
+        // Function to update progress
+        function updateProgress() {
+            fetch(`/api/conversion-status/${conversionId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Update school name
+                    if (data.data && data.data.school_name) {
+                        document.getElementById('schoolName').textContent = data.data.school_name;
+                    }
+                    
+                    // Update progress bar
+                    const progress = data.progress || 0;
+                    document.getElementById('progressPercent').textContent = progress;
+                    document.getElementById('progressFill').style.width = `${progress}%`;
+                    
+                    // Update status message
+                    document.getElementById('statusMessage').textContent = data.message || 'Processing...';
+                    
+                    // Show transition slides during processing
+                    if (progress > 0 && progress < 100) {
+                        showTransitionSlide(currentSlide);
+                        
+                        // Rotate slides every 8 seconds
+                        if (!window.slideInterval) {
+                            window.slideInterval = setInterval(() => {
+                                currentSlide = (currentSlide % totalSlides) + 1;
+                                showTransitionSlide(currentSlide);
+                            }, 8000);
+                        }
+                    }
+                    
+                    // Show account form when processing is complete
+                    if (progress === 100 && data.account_ready && !accountReady) {
+                        accountReady = true;
+                        clearInterval(window.slideInterval);
+                        hideAllSlides();
+                        document.getElementById('accountForm').style.display = 'block';
+                    }
+                    
+                    // Continue polling if not complete
+                    if (progress < 100 && data.status !== 'error') {
+                        setTimeout(updateProgress, 2000);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching conversion status:', error);
+                    document.getElementById('statusMessage').textContent = 'Error fetching status. Retrying...';
+                    setTimeout(updateProgress, 5000);
+                });
+        }
+        
+        // Function to show a specific transition slide
+        function showTransitionSlide(slideNumber) {
+            hideAllSlides();
+            document.getElementById(`slide${slideNumber}`).style.display = 'block';
+        }
+        
+        // Function to hide all transition slides
+        function hideAllSlides() {
+            for (let i = 1; i <= totalSlides; i++) {
+                document.getElementById(`slide${i}`).style.display = 'none';
+            }
+        }
+        
+        // Handle account creation
+        document.getElementById('createAccountBtn').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validate inputs
+            if (!username || !password) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            // Disable button during submission
+            this.disabled = true;
+            this.textContent = 'Creating Account...';
+            
+            // Submit account creation request
+            fetch('/api/create-account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    conversion_id: conversionId,
+                    username: username,
+                    password: password
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    // Show success message
+                    document.getElementById('accountForm').style.display = 'none';
+                    document.getElementById('successContainer').style.display = 'block';
+                    
+                    // Update GPTsite URL
+                    document.getElementById('gpsiteUrl').textContent = result.gptsite_url;
+                    document.getElementById('gpsiteLink').href = result.gptsite_url;
+                    document.getElementById('dashboardLink').href = '/dashboard';
+                } else {
+                    alert('Error creating account: ' + (result.message || 'Unknown error'));
+                    this.disabled = false;
+                    this.textContent = 'Create Account & Launch GPTsite';
+                }
+            })
+            .catch(error => {
+                console.error('Error creating account:', error);
+                alert('Error creating account. Please try again.');
+                this.disabled = false;
+                this.textContent = 'Create Account & Launch GPTsite';
+            });
+        });
+        
+        // Handle custom domain setup
+        document.getElementById('setupDomainBtn').addEventListener('click', function() {
+            const domain = document.getElementById('customDomain').value;
+            
+            if (!domain) {
+                alert('Please enter a domain name');
+                return;
+            }
+            
+            // Disable button during submission
+            this.disabled = true;
+            this.textContent = 'Setting Up Domain...';
+            
+            // Submit custom domain request
+            fetch('/api/custom-domain', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    conversion_id: conversionId,
+                    domain: domain
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('Custom domain setup initiated! It may take up to 24 hours for DNS changes to propagate.');
+                    document.getElementById('gpsiteUrl').textContent = `https://${domain}`;
+                    document.getElementById('gpsiteLink').href = `https://${domain}`;
+                } else {
+                    alert('Error setting up domain: ' + (result.message || 'Unknown error'));
+                }
+                this.disabled = false;
+                this.textContent = 'Set Up Custom Domain';
+            })
+            .catch(error => {
+                console.error('Error setting up domain:', error);
+                alert('Error setting up domain. Please try again.');
+                this.disabled = false;
+                this.textContent = 'Set Up Custom Domain';
+            });
+        });
+        
+        // Start progress updates when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
+

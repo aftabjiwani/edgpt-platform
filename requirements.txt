@@ -1,0 +1,12 @@
+# EdGPT Platform Requirements
+# Core Flask dependencies
+Flask==2.3.3
+Flask-CORS==4.0.0
+
+# Optional development dependencies
+gunicorn==21.2.0
+python-dotenv==1.0.0
+
+# Python version requirement
+# Python >= 3.8
+

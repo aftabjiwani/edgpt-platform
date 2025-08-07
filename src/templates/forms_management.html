@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms Management - EdGPT Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            color: #4a5568;
+            font-size: 28px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .back-btn, .add-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .add-btn {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+        
+        .back-btn:hover, .add-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .tabs {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 15px;
+        }
+        
+        .tab-btn {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #4a5568;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .tab-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .tab-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .form-card {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+        
+        .form-card.active {
+            border-color: #48bb78;
+            background: linear-gradient(135deg, rgba(72, 187, 120, 0.1), rgba(56, 161, 105, 0.1));
+        }
+        
+        .form-card.inactive {
+            border-color: #f56565;
+            background: linear-gradient(135deg, rgba(245, 101, 101, 0.1), rgba(229, 62, 62, 0.1));
+            opacity: 0.7;
+        }
+        
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .form-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .form-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .form-status.active {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .form-status.inactive {
+            background: #f56565;
+            color: white;
+        }
+        
+        .form-title {
+            color: #4a5568;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .form-description {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .form-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: #a0aec0;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 12px;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .action-btn.secondary {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+        
+        .action-btn.warning {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
+        }
+        
+        .action-btn.danger {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+        }
+        
+        .submissions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .submissions-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .submissions-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .submissions-table tr:hover {
+            background: #f7fafc;
+        }
+        
+        .submission-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .submission-status.pending {
+            background: #ed8936;
+            color: white;
+        }
+        
+        .submission-status.reviewed {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .submission-status.rejected {
+            background: #f56565;
+            color: white;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #718096;
+        }
+        
+        .empty-state .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .empty-state h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #4a5568;
+        }
+        
+        .stats-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .stat-card .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .label {
+            color: #718096;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .forms-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .submissions-table {
+                font-size: 14px;
+            }
+            
+            .submissions-table th,
+            .submissions-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📋 Forms Management</h1>
+            <div class="header-actions">
+                <a href="/dashboard" class="back-btn">
+                    ← Back to Dashboard
+                </a>
+                <button class="add-btn" onclick="addNewForm()">
+                    ➕ Add New Form
+                </button>
+            </div>
+        </div>
+        
+        <!-- Statistics Summary -->
+        <div class="stats-summary">
+            <div class="stat-card">
+                <div class="icon">📄</div>
+                <div class="value">{{ forms|length }}</div>
+                <div class="label">Total Forms</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="icon">✅</div>
+                <div class="value">{{ forms|selectattr('4', 'equalto', 1)|list|length }}</div>
+                <div class="label">Active Forms</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="icon">📝</div>
+                <div class="value">{{ submissions|length }}</div>
+                <div class="label">Total Submissions</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="icon">⏳</div>
+                <div class="value">{{ submissions|selectattr('4', 'equalto', 'pending')|list|length }}</div>
+                <div class="label">Pending Review</div>
+            </div>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('forms')">📋 Manage Forms</button>
+            <button class="tab-btn" onclick="showTab('submissions')">📝 Form Submissions</button>
+            <button class="tab-btn" onclick="showTab('analytics')">📊 Analytics</button>
+        </div>
+        
+        <!-- Forms Tab -->
+        <div id="forms-tab" class="tab-content">
+            <h2 style="color: #4a5568; margin-bottom: 20px; font-weight: 600;">School Forms</h2>
+            
+            {% if forms %}
+                <div class="forms-grid">
+                    {% for form in forms %}
+                    <div class="form-card {{ 'active' if form[4] else 'inactive' }}">
+                        <div class="form-icon">📋</div>
+                        <div class="form-header">
+                            <div class="form-status {{ 'active' if form[4] else 'inactive' }}">
+                                {{ 'Active' if form[4] else 'Inactive' }}
+                            </div>
+                        </div>
+                        
+                        <h3 class="form-title">{{ form[1] }}</h3>
+                        <p class="form-description">{{ form[2] or 'No description provided' }}</p>
+                        
+                        <div class="form-meta">
+                            <span>Category: {{ form[3] or 'General' }}</span>
+                            <span>Created: {{ form[5] }}</span>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button class="action-btn" onclick="editForm({{ form[0] }})">
+                                ✏️ Edit
+                            </button>
+                            <button class="action-btn secondary" onclick="previewForm({{ form[0] }})">
+                                👁️ Preview
+                            </button>
+                            <button class="action-btn warning" onclick="duplicateForm({{ form[0] }})">
+                                📋 Duplicate
+                            </button>
+                            {% if form[4] %}
+                            <button class="action-btn danger" onclick="deactivateForm({{ form[0] }})">
+                                ❌ Deactivate
+                            </button>
+                            {% else %}
+                            <button class="action-btn secondary" onclick="activateForm({{ form[0] }})">
+                                ✅ Activate
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-state">
+                    <div class="icon">📋</div>
+                    <h3>No Forms Created Yet</h3>
+                    <p>Create your first form to start collecting information from parents and students.</p>
+                    <button class="add-btn" onclick="addNewForm()" style="margin-top: 20px;">
+                        ➕ Create Your First Form
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+        
+        <!-- Submissions Tab -->
+        <div id="submissions-tab" class="tab-content" style="display: none;">
+            <h2 style="color: #4a5568; margin-bottom: 20px; font-weight: 600;">Form Submissions</h2>
+            
+            {% if submissions %}
+                <table class="submissions-table">
+                    <thead>
+                        <tr>
+                            <th>Form Name</th>
+                            <th>Submitted By</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Submitted</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for submission in submissions %}
+                        <tr>
+                            <td><strong>{{ submission[1] }}</strong></td>
+                            <td>{{ submission[2] or 'Anonymous' }}</td>
+                            <td>{{ submission[3] or 'Not provided' }}</td>
+                            <td>
+                                <span class="submission-status {{ submission[4] }}">
+                                    {{ submission[4] }}
+                                </span>
+                            </td>
+                            <td>{{ submission[5] }}</td>
+                            <td>
+                                <div style="display: flex; gap: 5px;">
+                                    <button class="action-btn" onclick="viewSubmission({{ submission[0] }})">
+                                        👁️ View
+                                    </button>
+                                    <button class="action-btn secondary" onclick="approveSubmission({{ submission[0] }})">
+                                        ✅ Approve
+                                    </button>
+                                    <button class="action-btn warning" onclick="contactSubmitter({{ submission[0] }})">
+                                        📧 Contact
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="empty-state">
+                    <div class="icon">📝</div>
+                    <h3>No Submissions Yet</h3>
+                    <p>When parents and students submit forms through your EdGPT, they'll appear here for review.</p>
+                </div>
+            {% endif %}
+        </div>
+        
+        <!-- Analytics Tab -->
+        <div id="analytics-tab" class="tab-content" style="display: none;">
+            <h2 style="color: #4a5568; margin-bottom: 20px; font-weight: 600;">Forms Analytics</h2>
+            
+            <div class="stats-summary">
+                <div class="stat-card">
+                    <div class="icon">📈</div>
+                    <div class="value">85%</div>
+                    <div class="label">Completion Rate</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon">⏱️</div>
+                    <div class="value">3.2 min</div>
+                    <div class="label">Avg. Completion Time</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon">📱</div>
+                    <div class="value">68%</div>
+                    <div class="label">Mobile Submissions</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="icon">🎯</div>
+                    <div class="value">92%</div>
+                    <div class="label">User Satisfaction</div>
+                </div>
+            </div>
+            
+            <div style="background: white; border-radius: 15px; padding: 30px; margin-top: 20px;">
+                <h3 style="color: #4a5568; margin-bottom: 20px;">Most Popular Forms</h3>
+                <div style="display: grid; gap: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f7fafc; border-radius: 10px;">
+                        <span style="font-weight: 600; color: #4a5568;">Student Enrollment Form</span>
+                        <span style="color: #667eea; font-weight: 600;">45 submissions</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f7fafc; border-radius: 10px;">
+                        <span style="font-weight: 600; color: #4a5568;">Field Trip Permission</span>
+                        <span style="color: #667eea; font-weight: 600;">32 submissions</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f7fafc; border-radius: 10px;">
+                        <span style="font-weight: 600; color: #4a5568;">Lunch Application</span>
+                        <span style="color: #667eea; font-weight: 600;">28 submissions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').style.display = 'block';
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+        
+        function addNewForm() {
+            alert('Opening form builder interface...');
+            // In a real implementation, this would open a form builder modal or redirect to a form creation page
+        }
+        
+        function editForm(formId) {
+            alert(`Opening form editor for form ${formId}`);
+        }
+        
+        function previewForm(formId) {
+            alert(`Opening form preview for form ${formId}`);
+        }
+        
+        function duplicateForm(formId) {
+            alert(`Creating duplicate of form ${formId}`);
+        }
+        
+        function deactivateForm(formId) {
+            if (confirm('Are you sure you want to deactivate this form?')) {
+                alert(`Deactivating form ${formId}`);
+            }
+        }
+        
+        function activateForm(formId) {
+            alert(`Activating form ${formId}`);
+        }
+        
+        function viewSubmission(submissionId) {
+            alert(`Opening submission details for ${submissionId}`);
+        }
+        
+        function approveSubmission(submissionId) {
+            alert(`Approving submission ${submissionId}`);
+        }
+        
+        function contactSubmitter(submissionId) {
+            alert(`Opening contact interface for submission ${submissionId}`);
+        }
+    </script>
+</body>
+</html>
+

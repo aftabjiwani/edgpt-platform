@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdGPT - Transform Your School Website Into an Intelligent EdGPT</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        /* Interactive Demo Styles */
+        .demo-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 40px auto;
+            max-width: 800px;
+            position: relative;
+        }
+        
+        .demo-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .demo-content {
+            padding: 30px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .chat-demo {
+            width: 100%;
+            max-width: 600px;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .chat-messages {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .message-bubble {
+            margin: 10px 0;
+            padding: 12px 16px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .message-bubble.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .message-bubble.ai {
+            background: white;
+            color: #2d3748;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            max-width: 80px;
+            margin: 10px 0;
+        }
+        
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #9ca3af;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        .demo-play-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .demo-play-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .question-buttons {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .question-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 10px 15px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .question-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* Communication Comparison Styles */
+        .communication-comparison {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 60px 0;
+        }
+        
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 40px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .traditional-side, .gptsite-side {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .traditional-side {
+            border: 3px solid #ef4444;
+        }
+        
+        .gptsite-side {
+            border: 3px solid #10b981;
+        }
+        
+        .vs-divider {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+        
+        .communication-visual {
+            margin: 20px 0;
+            position: relative;
+            height: 200px;
+        }
+        
+        .traditional-chaos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .website-box {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            border-radius: 8px;
+            padding: 15px;
+            width: 200px;
+            position: relative;
+        }
+        
+        .navigation-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .nav-item {
+            background: #fecaca;
+            border: 1px solid #f87171;
+            border-radius: 4px;
+            padding: 5px;
+            font-size: 10px;
+            text-align: center;
+        }
+        
+        .confused-arrows {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .arrow {
+            font-size: 20px;
+            color: #ef4444;
+            animation: bounce 2s infinite;
+        }
+        
+        .arrow:nth-child(2) { animation-delay: 0.3s; }
+        .arrow:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .gptsite-simple {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .chat-bubble {
+            background: #dcfce7;
+            border: 2px solid #10b981;
+            border-radius: 20px;
+            padding: 15px 20px;
+            max-width: 180px;
+            position: relative;
+        }
+        
+        .chat-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #10b981;
+        }
+        
+        .direct-arrow {
+            font-size: 30px;
+            color: #10b981;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .user-icon {
+            width: 50px;
+            height: 50px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .demo-container {
+                margin: 20px;
+                max-width: calc(100% - 40px);
+            }
+            
+            .demo-content {
+                padding: 20px;
+                min-height: 300px;
+            }
+            
+            .chat-demo {
+                padding: 15px;
+            }
+            
+            .message-bubble {
+                font-size: 14px;
+                padding: 10px 14px;
+            }
+            
+            .demo-play-button {
+                padding: 12px 24px;
+                font-size: 16px;
+            }
+            
+            .question-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .vs-divider {
+                width: 60px;
+                height: 60px;
+                font-size: 18px;
+                margin: 0 auto;
+            }
+            
+            .communication-visual {
+                height: 150px;
+            }
+            
+            .website-box {
+                width: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .demo-container {
+                margin: 10px;
+                max-width: calc(100% - 20px);
+            }
+            
+            .demo-content {
+                padding: 15px;
+            }
+            
+            .chat-messages {
+                max-height: 250px;
+            }
+            
+            .message-bubble {
+                font-size: 13px;
+                max-width: 90%;
+            }
+            
+            .traditional-side, .gptsite-side {
+                padding: 20px;
+            }
+            
+            .website-box {
+                width: 120px;
+                padding: 10px;
+            }
+            
+            .nav-item {
+                font-size: 8px;
+                padding: 3px;
+            }
+        }
+        
+        /* Slideshow Styles */
+        .slideshow-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 40px auto;
+            max-width: 1000px;
+            position: relative;
+        }
+        
+        .slide {
+            display: none;
+            padding: 40px;
+            text-align: center;
+            min-height: 400px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .slide h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+        
+        .slide p {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .slide-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .slide-nav button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .slide-nav button:hover {
+            background: #5a67d8;
+        }
+        
+        .slide-indicators {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+        
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-graduation-cap text-2xl text-blue-600 mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">EdGPT</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#demo" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Live Demo</a>
+                    <a href="#features" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Features</a>
+                    <a href="/signup" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Get Started</a>
+                    <a href="/login" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-8 mb-8 max-w-4xl mx-auto">
+                <p class="text-xl italic mb-4">"Websites are a thing of the past"</p>
+                <p class="text-sm">- GPT AI Corporation</p>
+            </div>
+            
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                Transform Your School Website<br>
+                Into an Intelligent EdGPT
+            </h1>
+            
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                Replace complex navigation with instant, conversational access to all school information through your personalized EdGPT
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#demo" class="bg-white bg-opacity-20 backdrop-blur-sm text-white px-8 py-3 rounded-lg font-semibold hover:bg-opacity-30 transition-all">
+                    <i class="fas fa-play mr-2"></i>Watch Live EdGPT Demo
+                </a>
+                <a href="/signup" class="bg-red-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-600 transition-all">
+                    <i class="fas fa-rocket mr-2"></i>Convert to EdGPT Today
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">
+                The Website Crisis: Why Traditional Sites Fail Visitors
+            </h2>
+            <p class="text-xl text-center text-gray-600 mb-12">
+                Extensive research reveals that traditional websites create systematic barriers, abandoning visitors when they need help most.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center bg-gray-50 p-8 rounded-lg">
+                    <div class="text-5xl font-bold text-blue-600 mb-4">94.8%</div>
+                    <p class="text-gray-700">of websites fail users with accessibility barriers</p>
+                    <p class="text-sm text-gray-500 mt-2">WebAIM Million 2025 Study</p>
+                </div>
+                <div class="text-center bg-gray-50 p-8 rounded-lg">
+                    <div class="text-5xl font-bold text-blue-600 mb-4">70%</div>
+                    <p class="text-gray-700">of users prefer search over navigation</p>
+                    <p class="text-sm text-gray-500 mt-2">User Experience Research 2025</p>
+                </div>
+                <div class="text-center bg-gray-50 p-8 rounded-lg">
+                    <div class="text-5xl font-bold text-blue-600 mb-4">$6.9B</div>
+                    <p class="text-gray-700">lost annually due to poor websites</p>
+                    <p class="text-sm text-gray-500 mt-2">Digital Accessibility Report</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Communication Comparison Section -->
+    <section class="communication-comparison">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-4">
+                Traditional Website Chaos vs Simple GPTsite Communication
+            </h2>
+            <p class="text-xl text-center text-gray-600 mb-12">
+                See the dramatic difference between confusing navigation and direct conversation
+            </p>
+            
+            <div class="comparison-container">
+                <!-- Traditional Website Side -->
+                <div class="traditional-side">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">❌ Traditional Website</h3>
+                    <p class="text-gray-600 mb-6">Complex navigation creates barriers and confusion</p>
+                    
+                    <div class="communication-visual">
+                        <div class="traditional-chaos">
+                            <div class="website-box">
+                                <div class="text-sm font-bold text-red-700">School Website</div>
+                                <div class="navigation-items">
+                                    <div class="nav-item">About</div>
+                                    <div class="nav-item">Admissions</div>
+                                    <div class="nav-item">Academics</div>
+                                    <div class="nav-item">Calendar</div>
+                                    <div class="nav-item">News</div>
+                                    <div class="nav-item">Contact</div>
+                                    <div class="nav-item">Forms</div>
+                                    <div class="nav-item">Resources</div>
+                                </div>
+                                <div class="confused-arrows">
+                                    <span class="arrow">↗️</span>
+                                    <span class="arrow">↘️</span>
+                                    <span class="arrow">↙️</span>
+                                </div>
+                            </div>
+                            <div class="user-icon" style="background: #ef4444; margin-top: 40px;">
+                                <i class="fas fa-user-confused"></i>
+                                😵
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-left space-y-2 text-sm text-gray-600">
+                        <p>• Parents hunt through multiple pages</p>
+                        <p>• Information buried in complex menus</p>
+                        <p>• High abandonment rates</p>
+                        <p>• Frustrated users leave without answers</p>
+                    </div>
+                </div>
+
+                <!-- VS Divider -->
+                <div class="vs-divider">
+                    VS
+                </div>
+
+                <!-- GPTsite Side -->
+                <div class="gptsite-side">
+                    <h3 class="text-2xl font-bold text-green-600 mb-4">✅ EdGPT Experience</h3>
+                    <p class="text-gray-600 mb-6">Direct conversation gets instant answers</p>
+                    
+                    <div class="communication-visual">
+                        <div class="gptsite-simple">
+                            <div class="chat-bubble">
+                                <div class="text-sm font-bold text-green-700">EdGPT Assistant</div>
+                                <div class="text-xs mt-1">"Hi! What would you like to know about our school?"</div>
+                            </div>
+                            <div class="direct-arrow">↓</div>
+                            <div class="user-icon">
+                                😊
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-left space-y-2 text-sm text-gray-600">
+                        <p>• One simple conversation interface</p>
+                        <p>• Instant answers to any question</p>
+                        <p>• 24/7 availability</p>
+                        <p>• Happy parents get immediate help</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="/signup" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg text-xl font-bold hover:from-blue-700 hover:to-purple-700 transition-all inline-block">
+                    Transform Your School Communication Today
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section id="demo" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">
+                Experience Your School's EdGPT
+            </h2>
+            
+            <div class="demo-container">
+                <div class="demo-header">
+                    <h3 id="chatTitle" class="text-2xl font-bold">Experience Your EdGPT</h3>
+                    <p class="text-lg opacity-90">See how parents interact with your intelligent school site</p>
+                </div>
+                
+                <div class="demo-content">
+                    <div class="chat-demo">
+                        <div id="chatMessages" class="chat-messages">
+                            <div class="message-bubble ai">
+                                Hi! I'm your school's EdGPT assistant. I can help you with enrollment information, school schedules, lunch menus, and much more. What would you like to know?
+                            </div>
+                        </div>
+                        
+                        <div id="questionButtons" class="question-buttons">
+                            <!-- Question buttons will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <button id="startDemo" class="demo-play-button" onclick="startChatDemo()">
+                        <i class="fas fa-play mr-2"></i>Start Interactive Demo
+                    </button>
+                    
+                    <p class="text-gray-600 mt-4 text-center">
+                        <span id="ctaText">See How Your School Looks as an EdGPT</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Embedded Slideshow Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">
+                See How EdGPT Transforms Schools
+            </h2>
+            <p class="text-xl text-center text-gray-600 mb-12">
+                Discover the complete solution that replaces traditional websites with intelligent conversation
+            </p>
+            
+            <div class="slideshow-container">
+                <!-- Slide 1: Welcome -->
+                <div class="slide active">
+                    <div class="flex items-center justify-center mb-8">
+                        <i class="fas fa-graduation-cap text-6xl text-blue-600"></i>
+                    </div>
+                    <h2>🏫 Welcome to EdGPT Demo</h2>
+                    <p>See how EdGPT transforms traditional school websites into intelligent, conversational experiences that parents and students actually want to use.</p>
+                    <div class="grid md:grid-cols-3 gap-8 mt-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600">24/7</div>
+                            <p class="text-gray-600">Always Available</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600">3 sec</div>
+                            <p class="text-gray-600">Average Response</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-600">95%</div>
+                            <p class="text-gray-600">Questions Answered</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: School Inquiries -->
+                <div class="slide">
+                    <div class="flex items-center justify-center mb-8">
+                        <i class="fas fa-comments text-6xl text-green-600"></i>
+                    </div>
+                    <h2>📚 School Inquiries Made Easy</h2>
+                    <p>Parents get instant answers to common questions without navigating complex menus or waiting for callbacks.</p>
+                    <div class="bg-white rounded-lg p-6 mt-8 max-w-2xl mx-auto">
+                        <div class="space-y-4">
+                            <div class="text-left">
+                                <div class="bg-blue-100 rounded-lg p-3 inline-block">
+                                    <strong>Parent:</strong> "What time does school start tomorrow?"
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="bg-gray-100 rounded-lg p-3 inline-block">
+                                    <strong>EdGPT:</strong> "School starts at 8:00 AM tomorrow. Doors open at 7:45 AM for early arrival."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Enrollment Supercharged -->
+                <div class="slide">
+                    <div class="flex items-center justify-center mb-8">
+                        <i class="fas fa-rocket text-6xl text-purple-600"></i>
+                    </div>
+                    <h2>🎯 Enrollment Supercharged</h2>
+                    <p>Transform your enrollment process from frustrating form-hunting to engaging conversation.</p>
+                    <div class="grid md:grid-cols-2 gap-8 mt-8">
+                        <div class="bg-red-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-red-600 mb-4">❌ Traditional Website</h3>
+                            <ul class="text-left space-y-2 text-gray-700">
+                                <li>• Complex navigation menus</li>
+                                <li>• Hidden enrollment forms</li>
+                                <li>• Outdated information</li>
+                                <li>• No immediate assistance</li>
+                                <li>• High abandonment rates</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h3 class="text-xl font-bold text-green-600 mb-4">✅ EdGPT Experience</h3>
+                            <ul class="text-left space-y-2 text-gray-700">
+                                <li>• Instant conversation</li>
+                                <li>• Guided enrollment process</li>
+                                <li>• Real-time information</li>
+                                <li>• 24/7 assistance</li>
+                                <li>• Higher conversion rates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4: Results That Matter -->
+                <div class="slide">
+                    <div class="flex items-center justify-center mb-8">
+                        <i class="fas fa-chart-line text-6xl text-yellow-600"></i>
+                    </div>
+                    <h2>📈 Results That Matter</h2>
+                    <p>Schools using EdGPT see dramatic improvements in parent engagement and enrollment rates.</p>
+                    <div class="grid md:grid-cols-3 gap-8 mt-8">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <div class="text-4xl font-bold text-blue-600 mb-2">40%</div>
+                            <p class="text-gray-700">More Parent Inquiries</p>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <div class="text-4xl font-bold text-green-600 mb-2">60%</div>
+                            <p class="text-gray-700">Faster Response Time</p>
+                        </div>
+                        <div class="bg-purple-50 p-6 rounded-lg">
+                            <div class="text-4xl font-bold text-purple-600 mb-2">25%</div>
+                            <p class="text-gray-700">Higher Enrollment</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 5: Interactive EdGPT Demo -->
+                <div class="slide">
+                    <div class="flex items-center justify-center mb-8">
+                        <i class="fas fa-robot text-6xl text-indigo-600"></i>
+                    </div>
+                    <h2>💬 Interactive EdGPT Demo</h2>
+                    <p>Experience how parents will interact with your school's EdGPT assistant.</p>
+                    <div class="bg-white rounded-lg p-6 mt-8 max-w-2xl mx-auto">
+                        <div class="space-y-4">
+                            <div class="text-left">
+                                <div class="bg-blue-100 rounded-lg p-3 inline-block">
+                                    <strong>Parent:</strong> "When is the next PTA meeting?"
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="bg-gray-100 rounded-lg p-3 inline-block">
+                                    <strong>EdGPT:</strong> "The next PTA meeting is Thursday, March 15th at 7:00 PM in the library. Should I add this to your calendar?"
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all">
+                                Try Interactive Demo Above ↑
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 6: Ready to Transform -->
+                <div class="slide">
+                    <div class="flex items-center justify-center mb-8">
+                        <i class="fas fa-star text-6xl text-yellow-500"></i>
+                    </div>
+                    <h2>🎯 Ready to Transform?</h2>
+                    <p>Join hundreds of schools that have already transformed their parent and student experience with EdGPT.</p>
+                    <div class="mt-8">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-8 rounded-lg max-w-2xl mx-auto">
+                            <h3 class="text-2xl font-bold mb-4">Start Your Free Trial Today</h3>
+                            <p class="mb-6">See how your school looks as an EdGPT in just 5 minutes</p>
+                            <div class="space-y-2 mb-6">
+                                <p>✅ Free 7-day trial</p>
+                                <p>✅ No credit card required</p>
+                                <p>✅ Setup in minutes</p>
+                            </div>
+                            <a href="/signup" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all inline-block">
+                                Transform Your School Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="slide-nav">
+                    <button onclick="changeSlide(-1)">❮</button>
+                    <button onclick="changeSlide(1)">❯</button>
+                </div>
+
+                <!-- Indicators -->
+                <div class="slide-indicators">
+                    <span class="indicator active" onclick="currentSlide(1)"></span>
+                    <span class="indicator" onclick="currentSlide(2)"></span>
+                    <span class="indicator" onclick="currentSlide(3)"></span>
+                    <span class="indicator" onclick="currentSlide(4)"></span>
+                    <span class="indicator" onclick="currentSlide(5)"></span>
+                    <span class="indicator" onclick="currentSlide(6)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">
+                Why Your School Needs an AI Receptionist
+            </h2>
+            <p class="text-xl text-center text-gray-600 mb-12">
+                Transform your website from a static brochure into an intelligent receptionist that works 24/7 to convert visitors into engaged families and prospective clients.
+            </p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl mb-4">📈</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">40% More Inquiries</h3>
+                    <p class="text-gray-600">AI receptionists capture family inquiries that would otherwise leave your website without contacting you</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl mb-4">🕐</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">24/7 Availability</h3>
+                    <p class="text-gray-600">Never miss a potential family - your AI receptionist works around the clock</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Instant Responses</h3>
+                    <p class="text-gray-600">No more waiting for callbacks - families get immediate answers to their questions</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Better Support</h3>
+                    <p class="text-gray-600">AI pre-qualifies inquiries and gathers key information before families contact your school staff</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl mb-4">✨</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Professional Image</h3>
+                    <p class="text-gray-600">Show families you're innovative and client-focused with cutting-edge technology</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <div class="text-4xl mb-4">🚀</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Easy Setup</h3>
+                    <p class="text-gray-600">Your AI receptionist learns from your existing website content and goes live in minutes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6">Ready to Transform Your School Website?</h2>
+            <p class="text-xl mb-8">Join thousands of schools providing better parent and student service with EdGPT</p>
+            
+            <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-8 mb-8">
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <p class="text-lg">✅ Free 7-day trial</p>
+                    </div>
+                    <div>
+                        <p class="text-lg">✅ No credit card required</p>
+                    </div>
+                    <div>
+                        <p class="text-lg">✅ Cancel anytime</p>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="/signup" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-xl font-bold hover:bg-gray-100 transition-all inline-block">
+                Start Your Free Trial Today
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <i class="fas fa-graduation-cap text-2xl text-blue-400 mr-2"></i>
+                    <span class="text-xl font-bold">EdGPT</span>
+                </div>
+                <p class="text-gray-400 mb-4">Transform your school website into an intelligent EdGPT</p>
+                <div class="flex justify-center space-x-6">
+                    <a href="/privacy" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                    <a href="/terms" class="text-gray-400 hover:text-white">Terms of Service</a>
+                    <a href="/contact" class="text-gray-400 hover:text-white">Contact</a>
+                </div>
+                <p class="text-gray-500 text-sm mt-4">© 2025 EdGPT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Domain-specific chat demo configuration for EdGPT
+        const DOMAIN_CHAT_CONFIG = {
+            'edgpt.ai': {
+                title: 'Experience Your EdGPT',
+                subtitle: 'See how parents interact with your intelligent school site',
+                primaryColor: '#667eea',
+                secondaryColor: '#764ba2',
+                ctaText: 'See How Your School Looks as an EdGPT',
+                conversations: [
+                    {
+                        user: "What time does school start tomorrow?",
+                        ai: "School starts at 8:00 AM tomorrow. The doors open at 7:45 AM for early arrival. Would you like me to send you our daily schedule?",
+                        delay: 1500
+                    },
+                    {
+                        user: "What's for lunch today?",
+                        ai: "Today's lunch menu includes pizza, garden salad, fresh fruit, and milk. We also have a vegetarian option available. Would you like to see the full weekly menu?",
+                        delay: 1800
+                    },
+                    {
+                        user: "When is the next PTA meeting?",
+                        ai: "The next PTA meeting is scheduled for Thursday, March 15th at 7:00 PM in the school library. The agenda includes budget discussions and upcoming events. Should I add this to your calendar?",
+                        delay: 2000
+                    }
+                ],
+                questions: [
+                    "What time does school start?",
+                    "What's for lunch today?",
+                    "When is the next PTA meeting?",
+                    "How do I enroll my child?",
+                    "What are the school hours?",
+                    "Is there after-school care?"
+                ]
+            }
+        };
+
+        // Chat demo functionality
+        let chatDemoActive = false;
+        let currentConversation = 0;
+
+        function startChatDemo() {
+            if (chatDemoActive) return;
+            
+            chatDemoActive = true;
+            const domain = window.location.hostname;
+            const config = DOMAIN_CHAT_CONFIG[domain] || DOMAIN_CHAT_CONFIG['edgpt.ai'];
+            
+            // Hide start button
+            document.getElementById('startDemo').style.display = 'none';
+            
+            // Update chat header
+            document.getElementById('chatTitle').textContent = config.title;
+            
+            // Clear messages and show first conversation
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.innerHTML = '<div class="message-bubble ai">Hi! I\'m your school\'s EdGPT assistant. I can help you with enrollment information, school schedules, lunch menus, and much more. What would you like to know?</div>';
+            
+            // Start conversation sequence
+            currentConversation = 0;
+            setTimeout(() => showNextConversation(config), 2000);
+        }
+
+        function showNextConversation(config) {
+            if (currentConversation >= config.conversations.length) {
+                showQuestionButtons(config);
+                return;
+            }
+
+            const conversation = config.conversations[currentConversation];
+            const messagesContainer = document.getElementById('chatMessages');
+
+            // Add user message
+            setTimeout(() => {
+                addMessage(conversation.user, 'user');
+                
+                // Show typing indicator
+                setTimeout(() => {
+                    showTypingIndicator();
+                    
+                    // Add AI response
+                    setTimeout(() => {
+                        hideTypingIndicator();
+                        addMessage(conversation.ai, 'ai');
+                        currentConversation++;
+                        setTimeout(() => showNextConversation(config), 2000);
+                    }, conversation.delay);
+                }, 500);
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message-bubble ${sender}`;
+            messageDiv.textContent = text;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const messagesContainer = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typing';
+            typingDiv.innerHTML = '<div class="typing-dots"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const typing = document.getElementById('typing');
+            if (typing) typing.remove();
+        }
+
+        function showQuestionButtons(config) {
+            const questionsContainer = document.getElementById('questionButtons');
+            questionsContainer.innerHTML = '';
+            
+            config.questions.forEach(question => {
+                const button = document.createElement('button');
+                button.className = 'question-btn';
+                button.textContent = question;
+                button.onclick = () => askQuestion(question, config);
+                questionsContainer.appendChild(button);
+            });
+            
+            questionsContainer.style.display = 'grid';
+        }
+
+        function askQuestion(question, config) {
+            addMessage(question, 'user');
+            
+            setTimeout(() => {
+                showTypingIndicator();
+                
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    const responses = [
+                        "I'd be happy to help you with that! Let me get you the most current information.",
+                        "Great question! This is exactly the kind of information parents need quickly.",
+                        "I can provide you with detailed information about that right away.",
+                        "That's a common question from parents. Here's what you need to know..."
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessage(randomResponse, 'ai');
+                }, 1500);
+            }, 500);
+        }
+
+        // Slideshow functionality
+        let slideIndex = 1;
+
+        function changeSlide(n) {
+            showSlide(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            if (slides[slideIndex - 1]) {
+                slides[slideIndex - 1].classList.add('active');
+            }
+            if (indicators[slideIndex - 1]) {
+                indicators[slideIndex - 1].classList.add('active');
+            }
+        }
+
+        // Auto-advance slideshow
+        setInterval(() => {
+            changeSlide(1);
+        }, 8000);
+
+        // Initialize chat demo configuration on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const domain = window.location.hostname;
+            const config = DOMAIN_CHAT_CONFIG[domain] || DOMAIN_CHAT_CONFIG['edgpt.ai'];
+            
+            // Set CSS custom properties for domain colors
+            document.documentElement.style.setProperty('--primary-color', config.primaryColor);
+            document.documentElement.style.setProperty('--secondary-color', config.secondaryColor);
+            
+            // Update CTA text
+            const ctaElement = document.getElementById('ctaText');
+            if (ctaElement) {
+                ctaElement.textContent = config.ctaText;
+            }
+        });
+    </script>
+</body>
+</html>
+

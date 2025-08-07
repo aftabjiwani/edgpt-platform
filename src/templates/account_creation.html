@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your EdGPT Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .account-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 40px auto;
+            max-width: 600px;
+            overflow: hidden;
+        }
+        
+        .account-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .account-content {
+            padding: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .progress-container {
+            margin-bottom: 30px;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 33.33%;
+        }
+        
+        .step-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a5568;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .step-circle.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .step-circle.complete {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 12px;
+            color: #4a5568;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+        
+        .site-info {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .site-info h3 {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .site-info p {
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+        
+        .site-info strong {
+            color: #2d3748;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .account-container {
+                margin: 20px;
+            }
+            
+            .account-header, .account-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <div class="account-container">
+            <div class="account-header">
+                <h1 class="text-3xl font-bold mb-4">Create Your EdGPT Account</h1>
+                <p class="text-lg opacity-90">Your website has been successfully processed!</p>
+            </div>
+            
+            <div class="account-content">
+                <div class="progress-container">
+                    <div class="progress-steps">
+                        <div class="progress-step">
+                            <div class="step-circle complete">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="step-label">Website Processing</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-circle active">2</div>
+                            <div class="step-label">Account Creation</div>
+                        </div>
+                        <div class="progress-step">
+                            <div class="step-circle">3</div>
+                            <div class="step-label">GPTsite Launch</div>
+                        </div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 66%"></div>
+                    </div>
+                </div>
+                
+                <div class="site-info">
+                    <h3>Website Processing Complete</h3>
+                    <p><strong>School:</strong> <span id="schoolName">Your School</span></p>
+                    <p><strong>Website:</strong> <span id="websiteUrl">https://yourschool.edu</span></p>
+                    <p><strong>Pages Processed:</strong> <span id="pagesProcessed">15</span></p>
+                    <p><strong>Status:</strong> <span class="text-green-600 font-semibold">Ready for Account Creation</span></p>
+                </div>
+                
+                <form id="accountForm">
+                    <input type="hidden" id="conversionId" name="conversionId" value="{{ conversion_id }}">
+                    
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required placeholder="Choose a username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Choose a secure password">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                    </div>
+                    
+                    <button type="submit" id="submitBtn" class="submit-btn">
+                        <span>Create Account & Launch GPTsite</span>
+                        <div class="spinner" id="submitSpinner"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const conversionId = document.getElementById('conversionId').value;
+            
+            // Fetch conversion data
+            fetch(`/api/conversion-status/${conversionId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Update school information
+                    if (data.data && data.data.school_name) {
+                        document.getElementById('schoolName').textContent = data.data.school_name;
+                    }
+                    
+                    if (data.data && data.data.website_url) {
+                        document.getElementById('websiteUrl').textContent = data.data.website_url;
+                    }
+                    
+                    if (data.site_info && data.site_info.pages) {
+                        document.getElementById('pagesProcessed').textContent = data.site_info.pages;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching conversion data:', error);
+                });
+            
+            // Handle form submission
+            const form = document.getElementById('accountForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitSpinner = document.getElementById('submitSpinner');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // Validate inputs
+                if (!username || !password) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+                
+                // Disable button and show spinner
+                submitBtn.disabled = true;
+                submitSpinner.style.display = 'inline-block';
+                
+                // Submit account creation request
+                fetch('/api/create-account', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        conversion_id: conversionId,
+                        username: username,
+                        password: password
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        // Redirect to GPTsite
+                        window.location.href = `/gptsite/${conversionId}`;
+                    } else {
+                        // Show error message
+                        alert('Error creating account: ' + (result.message || 'Unknown error'));
+                        submitBtn.disabled = false;
+                        submitSpinner.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error creating account:', error);
+                    alert('An error occurred. Please try again.');
+                    submitBtn.disabled = false;
+                    submitSpinner.style.display = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

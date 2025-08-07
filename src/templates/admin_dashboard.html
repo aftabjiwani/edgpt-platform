@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Website Integration Code Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .copy-button {
+            transition: all 0.2s ease;
+        }
+        .copy-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .preview-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .chat-bubble {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .chat-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            max-width: 80%;
+        }
+        .message.user {
+            background: #e2e8f0;
+            margin-left: auto;
+            text-align: right;
+        }
+        .message.ai {
+            background: white;
+            border: 1px solid #e2e8f0;
+        }
+        .domain-colors {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        .color-option.selected {
+            border-color: #374151;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-xl font-bold text-gray-900">Admin Dashboard</h1>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-500">Welcome, Admin</span>
+                    <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Website Integration Code Generator</h2>
+            <p class="text-gray-600">Generate custom popup chat widget code for customers to embed on their existing websites</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Configuration Panel -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">
+                    <i class="fas fa-cog mr-2 text-blue-500"></i>Widget Configuration
+                </h3>
+
+                <!-- Domain Selection -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Target Domain</label>
+                    <select id="domainSelect" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="edgpt.ai">EdGPT.ai - Schools & Education</option>
+                        <option value="gptsites.ai">GPTSites.ai - General Business</option>
+                        <option value="lawfirmgpt.ai">LawFirmGPT.ai - Legal Services</option>
+                        <option value="cpafirm.ai">CPAFirm.ai - Accounting Services</option>
+                        <option value="taxprepgpt.ai">TaxPrepGPT.ai - Tax Preparation</option>
+                        <option value="businessbrokergpt.ai">BusinessBrokerGPT.ai - Business Brokerage</option>
+                    </select>
+                </div>
+
+                <!-- Customer Information -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Customer Website URL</label>
+                    <input type="url" id="customerWebsite" placeholder="https://customer-website.com" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Customer Business Name</label>
+                    <input type="text" id="businessName" placeholder="Customer Business Name" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <!-- Widget Customization -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Widget Position</label>
+                    <select id="widgetPosition" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="bottom-right">Bottom Right</option>
+                        <option value="bottom-left">Bottom Left</option>
+                        <option value="top-right">Top Right</option>
+                        <option value="top-left">Top Left</option>
+                    </select>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Color Scheme</label>
+                    <div class="domain-colors">
+                        <div class="color-option selected" data-colors='{"primary": "#667eea", "secondary": "#764ba2"}' 
+                             style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                        <div class="color-option" data-colors='{"primary": "#4f46e5", "secondary": "#7c3aed"}' 
+                             style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);"></div>
+                        <div class="color-option" data-colors='{"primary": "#059669", "secondary": "#0d9488"}' 
+                             style="background: linear-gradient(135deg, #059669 0%, #0d9488 100%);"></div>
+                        <div class="color-option" data-colors='{"primary": "#dc2626", "secondary": "#ea580c"}' 
+                             style="background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);"></div>
+                        <div class="color-option" data-colors='{"primary": "#7c2d12", "secondary": "#a16207"}' 
+                             style="background: linear-gradient(135deg, #7c2d12 0%, #a16207 100%);"></div>
+                        <div class="color-option" data-colors='{"primary": "#1f2937", "secondary": "#374151"}' 
+                             style="background: linear-gradient(135deg, #1f2937 0%, #374151 100%);"></div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Welcome Message</label>
+                    <textarea id="welcomeMessage" rows="3" placeholder="Hi! How can I help you today?" 
+                              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Widget Size</label>
+                    <select id="widgetSize" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="small">Small (50px)</option>
+                        <option value="medium" selected>Medium (60px)</option>
+                        <option value="large">Large (70px)</option>
+                    </select>
+                </div>
+
+                <!-- Generate Button -->
+                <button id="generateCode" class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition font-semibold">
+                    <i class="fas fa-code mr-2"></i>Generate Integration Code
+                </button>
+            </div>
+
+            <!-- Code Output Panel -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">
+                    <i class="fas fa-file-code mr-2 text-green-500"></i>Generated Integration Code
+                </h3>
+
+                <!-- Code Tabs -->
+                <div class="flex space-x-1 mb-4">
+                    <button class="code-tab active px-4 py-2 text-sm font-medium rounded-lg bg-blue-100 text-blue-700" data-tab="html">
+                        HTML
+                    </button>
+                    <button class="code-tab px-4 py-2 text-sm font-medium rounded-lg text-gray-500 hover:text-gray-700" data-tab="javascript">
+                        JavaScript
+                    </button>
+                    <button class="code-tab px-4 py-2 text-sm font-medium rounded-lg text-gray-500 hover:text-gray-700" data-tab="css">
+                        CSS
+                    </button>
+                </div>
+
+                <!-- HTML Code -->
+                <div id="htmlCode" class="code-section">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-700">HTML Code (Add to &lt;body&gt;)</span>
+                        <button class="copy-button bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm" data-copy="html">
+                            <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                    <div class="code-block" id="htmlCodeBlock">
+                        <!-- HTML code will be generated here -->
+                        <span class="text-gray-400">Click "Generate Integration Code" to create custom code</span>
+                    </div>
+                </div>
+
+                <!-- JavaScript Code -->
+                <div id="javascriptCode" class="code-section hidden">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-700">JavaScript Code (Add before &lt;/body&gt;)</span>
+                        <button class="copy-button bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm" data-copy="javascript">
+                            <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                    <div class="code-block" id="javascriptCodeBlock">
+                        <!-- JavaScript code will be generated here -->
+                        <span class="text-gray-400">Click "Generate Integration Code" to create custom code</span>
+                    </div>
+                </div>
+
+                <!-- CSS Code -->
+                <div id="cssCode" class="code-section hidden">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-700">CSS Code (Add to &lt;head&gt;)</span>
+                        <button class="copy-button bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm" data-copy="css">
+                            <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                    <div class="code-block" id="cssCodeBlock">
+                        <!-- CSS code will be generated here -->
+                        <span class="text-gray-400">Click "Generate Integration Code" to create custom code</span>
+                    </div>
+                </div>
+
+                <!-- Instructions -->
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <h4 class="font-semibold text-blue-900 mb-2">
+                        <i class="fas fa-info-circle mr-2"></i>Integration Instructions
+                    </h4>
+                    <ol class="text-sm text-blue-800 space-y-1">
+                        <li>1. Copy the HTML code and paste it into your website's &lt;body&gt; section</li>
+                        <li>2. Copy the CSS code and paste it into your website's &lt;head&gt; section</li>
+                        <li>3. Copy the JavaScript code and paste it before the closing &lt;/body&gt; tag</li>
+                        <li>4. Test the widget on your website to ensure it's working properly</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Preview -->
+        <div class="mt-8 bg-white rounded-lg shadow-sm border p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                <i class="fas fa-eye mr-2 text-purple-500"></i>Live Preview
+            </h3>
+            <div class="bg-gray-100 rounded-lg p-8 relative min-h-96">
+                <div class="text-center text-gray-500 mb-4">
+                    <i class="fas fa-desktop text-4xl mb-2"></i>
+                    <p>Preview of how the widget will appear on the customer's website</p>
+                </div>
+                
+                <!-- Preview Widget -->
+                <div class="preview-widget">
+                    <div class="chat-bubble" id="previewBubble">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="chat-window" id="previewWindow">
+                        <div class="chat-header" id="previewHeader">
+                            <div class="flex items-center">
+                                <i class="fas fa-robot mr-2"></i>
+                                <span id="previewTitle">AI Assistant</span>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="previewMessages">
+                            <div class="message ai">
+                                <span id="previewWelcome">Hi! How can I help you today?</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Domain-specific configurations
+        const DOMAIN_CONFIGS = {
+            'edgpt.ai': {
+                name: 'EdGPT',
+                title: 'School Assistant',
+                defaultMessage: 'Hi! I can help you with enrollment, schedules, events, and more. How can I assist you today?',
+                colors: { primary: '#667eea', secondary: '#764ba2' },
+                icon: 'fas fa-graduation-cap'
+            },
+            'gptsites.ai': {
+                name: 'GPTSite',
+                title: 'Business Assistant',
+                defaultMessage: 'Hi! I can help you with our services, pricing, availability, and more. How can I assist you today?',
+                colors: { primary: '#667eea', secondary: '#764ba2' },
+                icon: 'fas fa-briefcase'
+            },
+            'lawfirmgpt.ai': {
+                name: 'LawFirmGPT',
+                title: 'Legal Assistant',
+                defaultMessage: 'Hi! I can help you with our practice areas, attorney expertise, fees, and case information. How can I assist you today?',
+                colors: { primary: '#1e40af', secondary: '#3730a3' },
+                icon: 'fas fa-balance-scale'
+            },
+            'cpafirm.ai': {
+                name: 'CPAFirm.ai',
+                title: 'Accounting Assistant',
+                defaultMessage: 'Hi! I can help you with tax services, accounting questions, deadlines, and document requirements. How can I assist you today?',
+                colors: { primary: '#059669', secondary: '#0d9488' },
+                icon: 'fas fa-calculator'
+            },
+            'taxprepgpt.ai': {
+                name: 'TaxPrepGPT',
+                title: 'Tax Assistant',
+                defaultMessage: 'Hi! I can help you with tax preparation, deductions, credits, filing deadlines, and requirements. How can I assist you today?',
+                colors: { primary: '#059669', secondary: '#0d9488' },
+                icon: 'fas fa-file-invoice-dollar'
+            },
+            'businessbrokergpt.ai': {
+                name: 'BusinessBrokerGPT',
+                title: 'Brokerage Assistant',
+                defaultMessage: 'Hi! I can help you with business listings, valuations, sale processes, and financing options. How can I assist you today?',
+                colors: { primary: '#7c3aed', secondary: '#5b21b6' },
+                icon: 'fas fa-handshake'
+            }
+        };
+
+        let selectedColors = { primary: '#667eea', secondary: '#764ba2' };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDomainConfig();
+            updatePreview();
+            
+            // Event listeners
+            document.getElementById('domainSelect').addEventListener('change', updateDomainConfig);
+            document.getElementById('businessName').addEventListener('input', updatePreview);
+            document.getElementById('welcomeMessage').addEventListener('input', updatePreview);
+            document.getElementById('widgetPosition').addEventListener('change', updatePreview);
+            document.getElementById('widgetSize').addEventListener('change', updatePreview);
+            document.getElementById('generateCode').addEventListener('click', generateIntegrationCode);
+            
+            // Color selection
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.color-option').forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedColors = JSON.parse(this.dataset.colors);
+                    updatePreview();
+                });
+            });
+            
+            // Code tabs
+            document.querySelectorAll('.code-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.dataset.tab;
+                    
+                    // Update tab appearance
+                    document.querySelectorAll('.code-tab').forEach(t => {
+                        t.classList.remove('active', 'bg-blue-100', 'text-blue-700');
+                        t.classList.add('text-gray-500');
+                    });
+                    this.classList.add('active', 'bg-blue-100', 'text-blue-700');
+                    this.classList.remove('text-gray-500');
+                    
+                    // Show/hide code sections
+                    document.querySelectorAll('.code-section').forEach(section => {
+                        section.classList.add('hidden');
+                    });
+                    document.getElementById(tabName + 'Code').classList.remove('hidden');
+                });
+            });
+            
+            // Copy buttons
+            document.querySelectorAll('[data-copy]').forEach(button => {
+                button.addEventListener('click', function() {
+                    const type = this.dataset.copy;
+                    const codeBlock = document.getElementById(type + 'CodeBlock');
+                    
+                    navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                        this.classList.add('bg-green-100', 'text-green-700');
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.classList.remove('bg-green-100', 'text-green-700');
+                        }, 2000);
+                    });
+                });
+            });
+            
+            // Preview widget interaction
+            document.getElementById('previewBubble').addEventListener('click', function() {
+                const window = document.getElementById('previewWindow');
+                window.style.display = window.style.display === 'flex' ? 'none' : 'flex';
+            });
+        });
+
+        function updateDomainConfig() {
+            const domain = document.getElementById('domainSelect').value;
+            const config = DOMAIN_CONFIGS[domain];
+            
+            // Update welcome message placeholder
+            document.getElementById('welcomeMessage').placeholder = config.defaultMessage;
+            
+            // Update preview
+            updatePreview();
+        }
+
+        function updatePreview() {
+            const domain = document.getElementById('domainSelect').value;
+            const config = DOMAIN_CONFIGS[domain];
+            const businessName = document.getElementById('businessName').value || 'Your Business';
+            const welcomeMessage = document.getElementById('welcomeMessage').value || config.defaultMessage;
+            const position = document.getElementById('widgetPosition').value;
+            const size = document.getElementById('widgetSize').value;
+            
+            // Update preview content
+            document.getElementById('previewTitle').textContent = `${businessName} ${config.title}`;
+            document.getElementById('previewWelcome').textContent = welcomeMessage;
+            
+            // Update preview colors
+            const bubble = document.getElementById('previewBubble');
+            const header = document.getElementById('previewHeader');
+            const gradient = `linear-gradient(135deg, ${selectedColors.primary} 0%, ${selectedColors.secondary} 100%)`;
+            
+            bubble.style.background = gradient;
+            header.style.background = gradient;
+            
+            // Update preview size
+            const sizes = { small: '50px', medium: '60px', large: '70px' };
+            bubble.style.width = sizes[size];
+            bubble.style.height = sizes[size];
+            
+            // Update preview position
+            const previewWidget = document.querySelector('.preview-widget');
+            previewWidget.className = 'preview-widget';
+            
+            switch(position) {
+                case 'bottom-left':
+                    previewWidget.style.left = '20px';
+                    previewWidget.style.right = 'auto';
+                    previewWidget.style.bottom = '20px';
+                    previewWidget.style.top = 'auto';
+                    break;
+                case 'top-right':
+                    previewWidget.style.right = '20px';
+                    previewWidget.style.left = 'auto';
+                    previewWidget.style.top = '20px';
+                    previewWidget.style.bottom = 'auto';
+                    break;
+                case 'top-left':
+                    previewWidget.style.left = '20px';
+                    previewWidget.style.right = 'auto';
+                    previewWidget.style.top = '20px';
+                    previewWidget.style.bottom = 'auto';
+                    break;
+                default: // bottom-right
+                    previewWidget.style.right = '20px';
+                    previewWidget.style.left = 'auto';
+                    previewWidget.style.bottom = '20px';
+                    previewWidget.style.top = 'auto';
+            }
+        }
+
+        function generateIntegrationCode() {
+            const domain = document.getElementById('domainSelect').value;
+            const config = DOMAIN_CONFIGS[domain];
+            const customerWebsite = document.getElementById('customerWebsite').value;
+            const businessName = document.getElementById('businessName').value || 'Your Business';
+            const welcomeMessage = document.getElementById('welcomeMessage').value || config.defaultMessage;
+            const position = document.getElementById('widgetPosition').value;
+            const size = document.getElementById('widgetSize').value;
+            
+            // Generate unique widget ID
+            const widgetId = 'gptsite-widget-' + Math.random().toString(36).substr(2, 9);
+            
+            // Generate HTML code
+            const htmlCode = generateHTMLCode(widgetId, businessName, config, welcomeMessage, position, size);
+            
+            // Generate CSS code
+            const cssCode = generateCSSCode(widgetId, selectedColors, position, size);
+            
+            // Generate JavaScript code
+            const javascriptCode = generateJavaScriptCode(widgetId, domain, config, customerWebsite, businessName, welcomeMessage);
+            
+            // Update code blocks
+            document.getElementById('htmlCodeBlock').textContent = htmlCode;
+            document.getElementById('cssCodeBlock').textContent = cssCode;
+            document.getElementById('javascriptCodeBlock').textContent = javascriptCode;
+        }
+
+        function generateHTMLCode(widgetId, businessName, config, welcomeMessage, position, size) {
+            return `<!-- GPTSite Chat Widget -->
+<div id="${widgetId}" class="gptsite-widget">
+    <div class="gptsite-bubble" id="${widgetId}-bubble">
+        <i class="${config.icon}"></i>
+    </div>
+    <div class="gptsite-window" id="${widgetId}-window">
+        <div class="gptsite-header">
+            <div class="gptsite-header-content">
+                <i class="${config.icon}"></i>
+                <span class="gptsite-title">${businessName} Assistant</span>
+            </div>
+            <button class="gptsite-close" id="${widgetId}-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="gptsite-messages" id="${widgetId}-messages">
+            <div class="gptsite-message gptsite-message-ai">
+                ${welcomeMessage}
+            </div>
+        </div>
+        <div class="gptsite-input-area">
+            <input type="text" class="gptsite-input" id="${widgetId}-input" placeholder="Type your message...">
+            <button class="gptsite-send" id="${widgetId}-send">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>`;
+        }
+
+        function generateCSSCode(widgetId, colors, position, size) {
+            const sizes = { small: '50px', medium: '60px', large: '70px' };
+            const bubbleSize = sizes[size];
+            
+            const positionStyles = {
+                'bottom-right': 'bottom: 20px; right: 20px;',
+                'bottom-left': 'bottom: 20px; left: 20px;',
+                'top-right': 'top: 20px; right: 20px;',
+                'top-left': 'top: 20px; left: 20px;'
+            };
+            
+            return `<style>
+/* GPTSite Chat Widget Styles */
+#${widgetId} {
+    position: fixed;
+    ${positionStyles[position]}
+    z-index: 9999;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.gptsite-bubble {
+    width: ${bubbleSize};
+    height: ${bubbleSize};
+    background: linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary} 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.gptsite-bubble:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gptsite-window {
+    position: absolute;
+    ${position.includes('bottom') ? 'bottom: calc(100% + 10px);' : 'top: calc(100% + 10px);'}
+    ${position.includes('right') ? 'right: 0;' : 'left: 0;'}
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+}
+
+.gptsite-header {
+    background: linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary} 100%);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gptsite-header-content {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+.gptsite-header-content i {
+    margin-right: 0.5rem;
+}
+
+.gptsite-close {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.gptsite-close:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.gptsite-messages {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    background: #f8fafc;
+}
+
+.gptsite-message {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.gptsite-message-user {
+    background: #e2e8f0;
+    margin-left: auto;
+    text-align: right;
+}
+
+.gptsite-message-ai {
+    background: white;
+    border: 1px solid #e2e8f0;
+}
+
+.gptsite-input-area {
+    padding: 1rem;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.gptsite-input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+.gptsite-input:focus {
+    border-color: ${colors.primary};
+    box-shadow: 0 0 0 2px ${colors.primary}20;
+}
+
+.gptsite-send {
+    background: linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary} 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.gptsite-send:hover {
+    opacity: 0.9;
+}
+
+.gptsite-typing {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    max-width: 80%;
+}
+
+.gptsite-typing-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.gptsite-typing-dot {
+    width: 6px;
+    height: 6px;
+    background: #9ca3af;
+    border-radius: 50%;
+    animation: gptsite-typing 1.4s infinite ease-in-out;
+}
+
+.gptsite-typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.gptsite-typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes gptsite-typing {
+    0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .gptsite-window {
+        width: calc(100vw - 40px);
+        height: calc(100vh - 100px);
+        ${position.includes('right') ? 'right: 20px;' : 'left: 20px;'}
+    }
+}
+</style>`;
+        }
+
+        function generateJavaScriptCode(widgetId, domain, config, customerWebsite, businessName, welcomeMessage) {
+            return `<script>
+(function() {
+    'use strict';
+    
+    // GPTSite Widget Configuration
+    const GPTSITE_CONFIG = {
+        widgetId: '${widgetId}',
+        domain: '${domain}',
+        customerWebsite: '${customerWebsite}',
+        businessName: '${businessName}',
+        welcomeMessage: '${welcomeMessage}',
+        apiEndpoint: 'https://${domain}/api/chat',
+        assistantName: '${config.name}'
+    };
+    
+    // Widget state
+    let isOpen = false;
+    let conversationHistory = [];
+    
+    // Initialize widget
+    function initGPTSiteWidget() {
+        const bubble = document.getElementById(GPTSITE_CONFIG.widgetId + '-bubble');
+        const window = document.getElementById(GPTSITE_CONFIG.widgetId + '-window');
+        const closeBtn = document.getElementById(GPTSITE_CONFIG.widgetId + '-close');
+        const input = document.getElementById(GPTSITE_CONFIG.widgetId + '-input');
+        const sendBtn = document.getElementById(GPTSITE_CONFIG.widgetId + '-send');
+        
+        if (!bubble || !window) {
+            console.error('GPTSite widget elements not found');
+            return;
+        }
+        
+        // Bubble click handler
+        bubble.addEventListener('click', function() {
+            toggleWidget();
+        });
+        
+        // Close button handler
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                closeWidget();
+            });
+        }
+        
+        // Send button handler
+        if (sendBtn) {
+            sendBtn.addEventListener('click', function() {
+                sendMessage();
+            });
+        }
+        
+        // Input enter key handler
+        if (input) {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        }
+        
+        // Initialize conversation
+        conversationHistory.push({
+            role: 'assistant',
+            content: GPTSITE_CONFIG.welcomeMessage
+        });
+    }
+    
+    function toggleWidget() {
+        const window = document.getElementById(GPTSITE_CONFIG.widgetId + '-window');
+        if (isOpen) {
+            closeWidget();
+        } else {
+            openWidget();
+        }
+    }
+    
+    function openWidget() {
+        const window = document.getElementById(GPTSITE_CONFIG.widgetId + '-window');
+        window.style.display = 'flex';
+        isOpen = true;
+        
+        // Focus input
+        const input = document.getElementById(GPTSITE_CONFIG.widgetId + '-input');
+        if (input) {
+            setTimeout(() => input.focus(), 100);
+        }
+    }
+    
+    function closeWidget() {
+        const window = document.getElementById(GPTSITE_CONFIG.widgetId + '-window');
+        window.style.display = 'none';
+        isOpen = false;
+    }
+    
+    function sendMessage() {
+        const input = document.getElementById(GPTSITE_CONFIG.widgetId + '-input');
+        const message = input.value.trim();
+        
+        if (!message) return;
+        
+        // Add user message to chat
+        addMessageToChat(message, 'user');
+        
+        // Clear input
+        input.value = '';
+        
+        // Add to conversation history
+        conversationHistory.push({
+            role: 'user',
+            content: message
+        });
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        // Send to API
+        sendToAPI(message);
+    }
+    
+    function addMessageToChat(message, sender) {
+        const messagesContainer = document.getElementById(GPTSITE_CONFIG.widgetId + '-messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'gptsite-message gptsite-message-' + sender;
+        messageDiv.textContent = message;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function showTypingIndicator() {
+        const messagesContainer = document.getElementById(GPTSITE_CONFIG.widgetId + '-messages');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'gptsite-typing';
+        typingDiv.id = GPTSITE_CONFIG.widgetId + '-typing';
+        typingDiv.innerHTML = '<div class="gptsite-typing-dots"><div class="gptsite-typing-dot"></div><div class="gptsite-typing-dot"></div><div class="gptsite-typing-dot"></div></div>';
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function hideTypingIndicator() {
+        const typingIndicator = document.getElementById(GPTSITE_CONFIG.widgetId + '-typing');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+    
+    function sendToAPI(message) {
+        // Simulate API call with realistic delay
+        setTimeout(() => {
+            hideTypingIndicator();
+            
+            // Generate contextual response based on domain
+            const response = generateContextualResponse(message, GPTSITE_CONFIG.domain);
+            
+            // Add AI response to chat
+            addMessageToChat(response, 'ai');
+            
+            // Add to conversation history
+            conversationHistory.push({
+                role: 'assistant',
+                content: response
+            });
+            
+        }, 1500 + Math.random() * 1000); // 1.5-2.5 second delay
+    }
+    
+    function generateContextualResponse(message, domain) {
+        const responses = {
+            'edgpt.ai': [
+                "I'd be happy to help you with that school-related question! Let me get you the most current information from our school database.",
+                "Great question! As your school's AI assistant, I can provide you with detailed information about enrollment, schedules, events, and more.",
+                "I can help you with that right away! Our school information system is always up-to-date with the latest details.",
+                "That's a common question from parents and students. Let me provide you with the specific information you need."
+            ],
+            'gptsites.ai': [
+                "I'd be happy to help you with that business inquiry! Let me get you the most current information about our services.",
+                "Great question! As your business AI assistant, I can provide you with detailed information about our offerings, pricing, and availability.",
+                "I can help you with that right away! Our business information system has all the details you need.",
+                "That's a common question from our customers. Let me provide you with the specific information you're looking for."
+            ],
+            'lawfirmgpt.ai': [
+                "I'd be happy to help you with that legal question! Let me get you information about our practice areas and attorney expertise.",
+                "Great question! As your law firm's AI assistant, I can provide you with detailed information about our legal services, fees, and case processes.",
+                "I can help you with that right away! Our legal information system has comprehensive details about our practice.",
+                "That's a common question from clients. Let me provide you with the specific legal information you need."
+            ],
+            'cpafirm.ai': [
+                "I'd be happy to help you with that accounting question! Let me get you information about our tax services and deadlines.",
+                "Great question! As your accounting firm's AI assistant, I can provide you with detailed information about tax preparation, deadlines, and requirements.",
+                "I can help you with that right away! Our accounting information system has all the current tax and financial details.",
+                "That's a common question from clients. Let me provide you with the specific accounting information you need."
+            ],
+            'taxprepgpt.ai': [
+                "I'd be happy to help you with that tax question! Let me get you information about deductions, credits, and filing requirements.",
+                "Great question! As your tax preparation AI assistant, I can provide you with detailed information about tax deadlines, forms, and processes.",
+                "I can help you with that right away! Our tax information system has all the current IRS guidelines and requirements.",
+                "That's a common question from taxpayers. Let me provide you with the specific tax information you need."
+            ],
+            'businessbrokergpt.ai': [
+                "I'd be happy to help you with that business brokerage question! Let me get you information about our listings, valuations, and sale processes.",
+                "Great question! As your business brokerage AI assistant, I can provide you with detailed information about buying, selling, and business valuations.",
+                "I can help you with that right away! Our brokerage information system has comprehensive details about available businesses and market conditions.",
+                "That's a common question from buyers and sellers. Let me provide you with the specific brokerage information you need."
+            ]
+        };
+        
+        const domainResponses = responses[domain] || responses['gptsites.ai'];
+        return domainResponses[Math.floor(Math.random() * domainResponses.length)];
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGPTSiteWidget);
+    } else {
+        initGPTSiteWidget();
+    }
+    
+})();
+</script>`;
+        }
+    </script>
+</body>
+</html>

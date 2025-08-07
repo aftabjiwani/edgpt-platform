@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Invoice - EdGPT</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-blue-600">EdGPT</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/dashboard/{{ signup_id }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">← Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Request Invoice</h2>
+            <p class="text-lg text-gray-600">We'll generate a professional invoice for your school's accounting department</p>
+        </div>
+
+        <!-- Plan Summary -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-4">Selected Plan</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <div class="text-sm text-gray-600">Plan</div>
+                    <div class="text-lg font-semibold">{{ plan.plan_name }}</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-600">Annual Price</div>
+                    <div class="text-lg font-semibold">${{ "%.0f"|format(plan.price) }}</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-600">Student Range</div>
+                    <div class="text-lg font-semibold">{{ plan.student_range }}</div>
+                </div>
+                <div>
+                    <div class="text-sm text-gray-600">Prorated Amount</div>
+                    <div class="text-lg font-semibold text-blue-600">${{ "%.2f"|format(prorated_amount) }}</div>
+                </div>
+            </div>
+            
+            <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                <p class="text-sm text-blue-800">
+                    <strong>Billing Period:</strong> {{ service_period }}<br>
+                    <strong>Note:</strong> Amount is prorated based on your school's fiscal year (July 1 - June 30)
+                </p>
+            </div>
+        </div>
+
+        <!-- Billing Information Form -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <h3 class="text-xl font-semibold mb-6">Billing Information</h3>
+            
+            <form id="invoiceForm" method="POST">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- School Information (Pre-filled) -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">School Name</label>
+                        <input type="text" value="{{ signup.school_name }}" readonly 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-600">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Administrator</label>
+                        <input type="text" value="{{ signup.admin_name }}" readonly 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-600">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" value="{{ signup.email }}" readonly 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-600">
+                    </div>
+                    
+                    <!-- Billing Contact Information -->
+                    <div>
+                        <label for="billing_contact" class="block text-sm font-medium text-gray-700 mb-2">
+                            Billing Contact Name *
+                        </label>
+                        <input type="text" id="billing_contact" name="billing_contact" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Enter billing contact name">
+                    </div>
+                    
+                    <div>
+                        <label for="billing_title" class="block text-sm font-medium text-gray-700 mb-2">
+                            Title/Department
+                        </label>
+                        <input type="text" id="billing_title" name="billing_title" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="e.g., Business Manager, Accounting">
+                    </div>
+                    
+                    <div>
+                        <label for="billing_email" class="block text-sm font-medium text-gray-700 mb-2">
+                            Billing Email *
+                        </label>
+                        <input type="email" id="billing_email" name="billing_email" required 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="billing@school.edu">
+                    </div>
+                </div>
+                
+                <!-- Billing Address -->
+                <div class="mt-6">
+                    <h4 class="text-lg font-medium text-gray-900 mb-4">Billing Address</h4>
+                    
+                    <div class="grid md:grid-cols-1 gap-6">
+                        <div>
+                            <label for="billing_address" class="block text-sm font-medium text-gray-700 mb-2">
+                                Street Address *
+                            </label>
+                            <input type="text" id="billing_address" name="billing_address" required 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                   placeholder="123 School Street">
+                        </div>
+                        
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div>
+                                <label for="billing_city" class="block text-sm font-medium text-gray-700 mb-2">
+                                    City *
+                                </label>
+                                <input type="text" id="billing_city" name="billing_city" required 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="City">
+                            </div>
+                            
+                            <div>
+                                <label for="billing_state" class="block text-sm font-medium text-gray-700 mb-2">
+                                    State *
+                                </label>
+                                <select id="billing_state" name="billing_state" required 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Select State</option>
+                                    <option value="AL">Alabama</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="AZ">Arizona</option>
+                                    <option value="AR">Arkansas</option>
+                                    <option value="CA">California</option>
+                                    <option value="CO">Colorado</option>
+                                    <option value="CT">Connecticut</option>
+                                    <option value="DE">Delaware</option>
+                                    <option value="FL">Florida</option>
+                                    <option value="GA">Georgia</option>
+                                    <!-- Add more states as needed -->
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label for="billing_zip" class="block text-sm font-medium text-gray-700 mb-2">
+                                    ZIP Code *
+                                </label>
+                                <input type="text" id="billing_zip" name="billing_zip" required 
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="12345">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Purchase Order -->
+                <div class="mt-6">
+                    <label for="purchase_order" class="block text-sm font-medium text-gray-700 mb-2">
+                        Purchase Order Number (Optional)
+                    </label>
+                    <input type="text" id="purchase_order" name="purchase_order" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="PO-2025-001">
+                    <p class="text-sm text-gray-600 mt-2">If your school requires a PO number for payment processing</p>
+                </div>
+                
+                <!-- Special Instructions -->
+                <div class="mt-6">
+                    <label for="special_instructions" class="block text-sm font-medium text-gray-700 mb-2">
+                        Special Instructions (Optional)
+                    </label>
+                    <textarea id="special_instructions" name="special_instructions" rows="3"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              placeholder="Any special billing requirements or instructions..."></textarea>
+                </div>
+                
+                <!-- Terms Agreement -->
+                <div class="mt-6">
+                    <div class="flex items-start">
+                        <input type="checkbox" id="terms_agreement" name="terms_agreement" required 
+                               class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded mt-1">
+                        <label for="terms_agreement" class="ml-3 text-sm text-gray-700">
+                            I agree to the <a href="/terms" class="text-blue-600 hover:text-blue-700">Terms of Service</a> 
+                            and confirm that the billing information provided is accurate. Payment is due within 30 days of invoice date.
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="mt-8 flex justify-center">
+                    <button type="submit" 
+                            class="bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-200 shadow-lg">
+                        Generate Invoice
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- What Happens Next -->
+        <div class="mt-8 bg-green-50 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-green-900 mb-4">What Happens Next?</h3>
+            <div class="space-y-3 text-sm text-green-800">
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Your invoice will be generated and emailed within 24 hours
+                </div>
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Your EdGPT will remain active during the payment process
+                </div>
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Payment is due within 30 days of invoice date
+                </div>
+                <div class="flex items-center">
+                    <svg class="h-5 w-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Questions? Contact us at billing@edgpt.ai
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('invoiceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Generating Invoice...';
+            submitBtn.disabled = true;
+            
+            // Collect form data
+            const formData = new FormData(e.target);
+            
+            // Submit form
+            fetch(window.location.href, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    alert('Invoice request submitted successfully! You will receive your invoice within 24 hours.');
+                    window.location.href = `/dashboard/{{ signup_id }}`;
+                } else {
+                    alert('Error: ' + data.error);
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                alert('Error submitting request. Please try again.');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
+

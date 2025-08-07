@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Trial - EdGPT</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-blue-600">EdGPT</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/dashboard/{{ signup_id }}" class="text-gray-600 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">← Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Step 1: Initial Cancellation -->
+        <div id="step1" class="step active">
+            <div class="bg-white rounded-lg shadow-sm p-8 text-center">
+                <div class="text-6xl mb-6">😔</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">We're Sorry to See You Go</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    Before you cancel your EdGPT trial, we'd love to understand what we could do better.
+                </p>
+                
+                <!-- Feedback Options -->
+                <div class="space-y-4 mb-8">
+                    <div class="text-left">
+                        <label class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="cancellation_reason" value="too_complex" class="mr-3">
+                            <span>The setup was too complex</span>
+                        </label>
+                    </div>
+                    <div class="text-left">
+                        <label class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="cancellation_reason" value="not_enough_value" class="mr-3">
+                            <span>Didn't see enough value for our school</span>
+                        </label>
+                    </div>
+                    <div class="text-left">
+                        <label class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="cancellation_reason" value="budget_constraints" class="mr-3">
+                            <span>Budget constraints</span>
+                        </label>
+                    </div>
+                    <div class="text-left">
+                        <label class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="cancellation_reason" value="technical_issues" class="mr-3">
+                            <span>Technical issues or bugs</span>
+                        </label>
+                    </div>
+                    <div class="text-left">
+                        <label class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer">
+                            <input type="radio" name="cancellation_reason" value="other" class="mr-3">
+                            <span>Other reason</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <button onclick="showStep2()" class="w-full bg-red-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-600 transition duration-200">
+                        Continue with Cancellation
+                    </button>
+                    <button onclick="goBack()" class="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-200 transition duration-200">
+                        Keep My EdGPT Active
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Need More Time? -->
+        <div id="step2" class="step">
+            <div class="bg-white rounded-lg shadow-sm p-8 text-center">
+                <div class="text-6xl mb-6">⏰</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Do You Need More Time to Evaluate?</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    GPTsites are much more effective in helping deliver information than traditional websites. 
+                    Many schools need a few extra days to see the full impact.
+                </p>
+                
+                <!-- Benefits Reminder -->
+                <div class="bg-blue-50 rounded-lg p-6 mb-8 text-left">
+                    <h3 class="font-semibold text-blue-900 mb-4">What you might be missing:</h3>
+                    <ul class="space-y-2 text-blue-800">
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            80% reduction in repetitive staff inquiries
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            24/7 instant parent support
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            75% improvement in family engagement
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                            Professional, modern school image
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <button onclick="extendTrial()" class="w-full bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition duration-200">
+                        Yes, Give Me 3 More Days
+                    </button>
+                    <button onclick="showStep3()" class="w-full bg-red-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-600 transition duration-200">
+                        No, I Still Want to Cancel
+                    </button>
+                    <button onclick="goBack()" class="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-200 transition duration-200">
+                        Keep My EdGPT Active
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Final Warning -->
+        <div id="step3" class="step">
+            <div class="bg-white rounded-lg shadow-sm p-8 text-center">
+                <div class="text-6xl mb-6">⚠️</div>
+                <h2 class="text-3xl font-bold text-red-600 mb-4">Final Warning</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    If you proceed with cancellation, <strong>all your data and knowledge will be permanently deleted</strong> 
+                    and we will not be able to recover it.
+                </p>
+                
+                <!-- What Will Be Lost -->
+                <div class="bg-red-50 rounded-lg p-6 mb-8 text-left">
+                    <h3 class="font-semibold text-red-900 mb-4">What will be permanently deleted:</h3>
+                    <ul class="space-y-2 text-red-800">
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                            Your custom knowledge base
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                            All conversation history
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                            Analytics and usage data
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                            Custom forms and integrations
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-red-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                            Your account and dashboard access
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <button onclick="showStep4()" class="w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition duration-200">
+                        I Understand - Proceed with Deletion
+                    </button>
+                    <button onclick="goBack()" class="w-full bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition duration-200">
+                        Keep My EdGPT Active
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: OTP Verification -->
+        <div id="step4" class="step">
+            <div class="bg-white rounded-lg shadow-sm p-8 text-center">
+                <div class="text-6xl mb-6">📧</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Verify Your Identity</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    We've sent a verification code to <strong>{{ signup.email }}</strong>. 
+                    Please enter the code to confirm account deletion.
+                </p>
+                
+                <div class="max-w-xs mx-auto mb-8">
+                    <input type="text" id="otpCode" maxlength="6" 
+                           class="w-full px-4 py-3 text-center text-2xl font-mono border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="000000">
+                </div>
+                
+                <div class="space-y-4">
+                    <button onclick="verifyOTP()" class="w-full bg-red-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-red-700 transition duration-200">
+                        Verify and Delete Account
+                    </button>
+                    <button onclick="resendOTP()" class="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-200 transition duration-200">
+                        Resend Code
+                    </button>
+                    <button onclick="goBack()" class="w-full bg-green-500 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-600 transition duration-200">
+                        Cancel Deletion
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: Deletion Complete -->
+        <div id="step5" class="step">
+            <div class="bg-white rounded-lg shadow-sm p-8 text-center">
+                <div class="text-6xl mb-6">✅</div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Account Deleted</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    Your EdGPT account has been permanently deleted. All data has been removed from our systems.
+                </p>
+                
+                <div class="bg-blue-50 rounded-lg p-6 mb-8">
+                    <h3 class="font-semibold text-blue-900 mb-4">Thank you for trying EdGPT</h3>
+                    <p class="text-blue-800 text-sm">
+                        We're sorry it didn't work out this time. If you ever want to give EdGPT another try, 
+                        you can always start a new trial at <a href="/" class="underline">edgpt.ai</a>
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <a href="/" class="inline-block bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
+                        Return to Homepage
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let otpSent = false;
+
+        function showStep(stepNumber) {
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            // Show target step
+            document.getElementById(`step${stepNumber}`).classList.add('active');
+            currentStep = stepNumber;
+        }
+
+        function showStep2() {
+            showStep(2);
+        }
+
+        function showStep3() {
+            showStep(3);
+        }
+
+        function showStep4() {
+            // Send OTP first
+            if (!otpSent) {
+                sendOTP();
+            }
+            showStep(4);
+        }
+
+        function goBack() {
+            window.location.href = '/dashboard/{{ signup_id }}';
+        }
+
+        function extendTrial() {
+            fetch('/extend-trial/{{ signup_id }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Great! Your trial has been extended by 3 days. We hope you\'ll discover the full value of EdGPT!');
+                    window.location.href = '/dashboard/{{ signup_id }}';
+                } else {
+                    alert('Error extending trial. Please contact support.');
+                }
+            });
+        }
+
+        function sendOTP() {
+            fetch('/send-deletion-otp/{{ signup_id }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    otpSent = true;
+                } else {
+                    alert('Error sending verification code. Please try again.');
+                }
+            });
+        }
+
+        function resendOTP() {
+            sendOTP();
+            alert('Verification code sent! Please check your email.');
+        }
+
+        function verifyOTP() {
+            const otpCode = document.getElementById('otpCode').value;
+            
+            if (otpCode.length !== 6) {
+                alert('Please enter the 6-digit verification code.');
+                return;
+            }
+
+            fetch('/verify-deletion-otp/{{ signup_id }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    otp_code: otpCode,
+                    cancellation_reason: document.querySelector('input[name="cancellation_reason"]:checked')?.value || 'not_specified'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showStep(5);
+                } else {
+                    alert('Invalid verification code. Please try again.');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+

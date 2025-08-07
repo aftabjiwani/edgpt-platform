@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPTSites - Transform Your Business Website Into an Intelligent GPTsite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quote-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .quote {
+            font-size: 2.5rem;
+            font-style: italic;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .quote::before,
+        .quote::after {
+            content: '"';
+            font-size: 4rem;
+            opacity: 0.5;
+            position: absolute;
+            top: -10px;
+        }
+        
+        .quote::before {
+            left: -30px;
+        }
+        
+        .quote::after {
+            right: -30px;
+        }
+        
+        .quote-author {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(238, 90, 36, 0.4);
+        }
+        
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .stats-section {
+            background: #f8fafc;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .demo-section {
+            background: white;
+            text-align: center;
+        }
+        
+        .demo-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            color: white;
+            margin-top: 2rem;
+        }
+        
+        .slideshow-container {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .slide {
+            display: none;
+            padding: 3rem;
+            text-align: center;
+        }
+        
+        .slide.active {
+            display: block;
+        }
+        
+        .slide h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .slide p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .slideshow-nav {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .nav-arrow {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-arrow:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .benefits-section {
+            background: #f8fafc;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-card h3 {
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .trial-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .trial-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .quote {
+                font-size: 1.8rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+
+<style>
+/* Enhanced Chat Demo Styles */
+.demo-play-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color, #667eea), var(--secondary-color, #764ba2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.5);
+    animation: pulse 2s infinite;
+    margin: 0 auto;
+}
+
+.demo-play-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 50px rgba(102, 126, 234, 0.8);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 30px rgba(102, 126, 234, 0.5); }
+    50% { box-shadow: 0 0 50px rgba(102, 126, 234, 0.8); }
+    100% { box-shadow: 0 0 30px rgba(102, 126, 234, 0.5); }
+}
+
+.play-triangle {
+    width: 0;
+    height: 0;
+    border-left: 25px solid white;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    margin-left: 5px;
+}
+
+.chat-demo-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    overflow: hidden;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.chat-header {
+    background: linear-gradient(135deg, var(--primary-color, #667eea) 0%, var(--secondary-color, #764ba2) 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.chat-messages {
+    height: 450px;
+    overflow-y: auto;
+    padding: 20px;
+    background: #f8fafc;
+}
+
+.message {
+    margin-bottom: 15px;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.message.ai {
+    text-align: left;
+}
+
+.message.user {
+    text-align: right;
+}
+
+.message-bubble {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 18px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.message.ai .message-bubble {
+    background: #e2e8f0;
+    color: #2d3748;
+    border-bottom-left-radius: 4px;
+}
+
+.message.user .message-bubble {
+    background: linear-gradient(135deg, var(--primary-color, #667eea), var(--secondary-color, #764ba2));
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.question-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 20px;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+}
+
+.question-btn {
+    padding: 12px 16px;
+    border: 2px solid var(--primary-color, #667eea);
+    background: white;
+    color: var(--primary-color, #667eea);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.question-btn:hover {
+    background: var(--primary-color, #667eea);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.question-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    background: #e2e8f0;
+    border-radius: 18px;
+    border-bottom-left-radius: 4px;
+    max-width: 80px;
+}
+
+.typing-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #64748b;
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.chat-demo-slide {
+    padding: 40px 20px;
+}
+
+/* Mobile Responsive Chat Demo Fixes */
+
+/* Ensure chat demo is visible on mobile */
+@media (max-width: 768px) {
+    .chat-demo-slide {
+        padding: 20px 15px !important;
+        display: block !important;
+        visibility: visible !important;
+    }
+    
+    .chat-demo-container {
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        border-radius: 15px !important;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+    .chat-header {
+        padding: 15px !important;
+        text-align: center !important;
+    }
+    
+    .chat-header h4 {
+        font-size: 1.2rem !important;
+        margin-bottom: 5px !important;
+    }
+    
+    .chat-header p {
+        font-size: 0.9rem !important;
+    }
+    
+    .chat-messages {
+        height: 350px !important;
+        padding: 15px !important;
+    }
+    
+    .demo-play-button {
+        width: 100px !important;
+        height: 100px !important;
+        margin: 0 auto !important;
+    }
+    
+    .play-triangle {
+        border-left: 20px solid white !important;
+        border-top: 12px solid transparent !important;
+        border-bottom: 12px solid transparent !important;
+    }
+    
+    .question-buttons {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+        padding: 15px !important;
+    }
+    
+    .question-btn {
+        padding: 10px 14px !important;
+        font-size: 12px !important;
+        border-radius: 20px !important;
+    }
+    
+    .message-bubble {
+        font-size: 13px !important;
+        padding: 10px 15px !important;
+        max-width: 85% !important;
+    }
+    
+    /* Ensure slideshow navigation is visible */
+    .slide-nav {
+        display: block !important;
+        position: absolute !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        background: rgba(255,255,255,0.9) !important;
+        border: none !important;
+        border-radius: 50% !important;
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 18px !important;
+        cursor: pointer !important;
+        z-index: 10 !important;
+    }
+    
+    .slide-nav.prev {
+        left: 10px !important;
+    }
+    
+    .slide-nav.next {
+        right: 10px !important;
+    }
+    
+    /* Ensure slide indicators are visible */
+    .slide-indicators {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        margin-top: 20px !important;
+    }
+    
+    .indicator {
+        width: 10px !important;
+        height: 10px !important;
+        border-radius: 50% !important;
+        background: rgba(0,0,0,0.3) !important;
+        cursor: pointer !important;
+        transition: background 0.3s ease !important;
+    }
+    
+    .indicator.active {
+        background: #667eea !important;
+    }
+    
+    /* Fix slideshow container for mobile */
+    .slideshow-container {
+        position: relative !important;
+        width: 100% !important;
+        overflow: hidden !important;
+        border-radius: 15px !important;
+        background: white !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    }
+    
+    .slide {
+        display: none !important;
+        padding: 30px 20px !important;
+        text-align: center !important;
+        min-height: 400px !important;
+    }
+    
+    .slide.active {
+        display: block !important;
+    }
+    
+    /* Mobile-specific chat demo styling */
+    .chat-demo-slide h3 {
+        font-size: 1.8rem !important;
+        margin-bottom: 20px !important;
+        color: #1f2937 !important;
+    }
+    
+    .chat-demo-slide .text-center.mt-6 a {
+        display: inline-block !important;
+        padding: 12px 24px !important;
+        font-size: 16px !important;
+        border-radius: 25px !important;
+        margin-top: 20px !important;
+    }
+    
+    .chat-demo-slide .text-center.mt-6 p {
+        font-size: 12px !important;
+        margin-top: 8px !important;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+    .chat-demo-container {
+        margin: 0 10px !important;
+    }
+    
+    .chat-messages {
+        height: 300px !important;
+        padding: 10px !important;
+    }
+    
+    .demo-play-button {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    
+    .play-triangle {
+        border-left: 16px solid white !important;
+        border-top: 10px solid transparent !important;
+        border-bottom: 10px solid transparent !important;
+    }
+    
+    .chat-demo-slide h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    .question-btn {
+        font-size: 11px !important;
+        padding: 8px 12px !important;
+    }
+}
+
+/* Ensure JavaScript functionality works on mobile */
+@media (max-width: 768px) {
+    .chat-demo-slide {
+        touch-action: manipulation !important;
+    }
+    
+    .demo-play-button {
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+    
+    .question-btn {
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+    
+    .slide-nav {
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
+}
+
+
+        .gptsite-footer {
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .gptsite-powered-by {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .gptsite-powered-by:hover {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            text-decoration: none;
+        }
+
+        .gptsite-powered-by i {
+            font-size: 0.75rem;
+            color: #667eea;
+        }
+
+        /* Mobile responsiveness for footer */
+        @media (max-width: 480px) {
+            .gptsite-powered-by {
+                font-size: 0.7rem;
+            }
+        }
+        </style>
+
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">GPTSites</a>
+            <ul class="nav-links">
+                <li><a href="#demo">Live Demo</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="/signin">Sign In</a></li>
+                <li><a href="/signup" class="cta-button">Start Free Trial</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="quote-container">
+                <div class="quote">Websites are a thing of the past</div>
+                <div class="quote-author">- GPT AI Corporation</div>
+            </div>
+            
+            <h1>Transform Your Business Website Into an Intelligent GPTsite</h1>
+            <p>GPTsite converts your existing business website into a conversational AI that provides instant answers to customers, clients, and visitors 24/7.</p>
+            
+            <div class="hero-buttons">
+                <a href="#demo" class="btn-primary">🎬 Watch Live Demo</a>
+                <a href="/signup" class="btn-secondary">🚀 Start Free Trial</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section stats-section">
+        <div class="container">
+            <h2>The Website Crisis: Why Traditional Sites Fail Visitors</h2>
+            <p>Extensive research reveals that traditional websites create systematic barriers, abandoning visitors when they need help most.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">94.8%</div>
+                    <div class="stat-label">of websites fail users with accessibility barriers<br><small>WebAIM Million 2025 Study</small></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">70%</div>
+                    <div class="stat-label">of users prefer search over navigation<br><small>User Experience Research 2025</small></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$6.9B</div>
+                    <div class="stat-label">lost annually due to poor websites<br><small>Digital Accessibility Report</small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="section demo-section">
+        <div class="container">
+            <h2>🎬 Live GPTsite Demo: See The Transformation</h2>
+            
+            <div class="demo-container">
+                <div class="slideshow-container">
+                    <div class="slide active">
+                        <h3>🏢 Welcome to GPTsite Demo</h3>
+                        <p>See how GPTsite transforms traditional business websites into intelligent, conversational experiences that customers actually want to use.</p>
+                        <div style="display: flex; justify-content: space-around; margin-top: 2rem;">
+                            <div><strong>24/7</strong><br>Always Available</div>
+                            <div><strong>3 sec</strong><br>Average Response</div>
+                            <div><strong>95%</strong><br>Questions Answered</div>
+                        </div>
+                    </div>
+                    
+                    <div class="slide">
+                        <h3>💼 Business Inquiries Made Easy</h3>
+                        <p>Customers get instant answers about your services, pricing, availability, and more - without waiting for callbacks or searching through pages.</p>
+                    </div>
+                    
+                    <div class="slide">
+                        <h3>🚀 Lead Generation Supercharged</h3>
+                        <p>Capture leads that would otherwise leave your site frustrated. GPTsite qualifies prospects and routes them to the right team member.</p>
+                    </div>
+                    
+                    <div class="slide">
+                        <h3>📈 Results That Matter</h3>
+                        <p>Businesses using GPTsite see 40% more qualified leads, 24/7 customer service, and dramatically improved customer satisfaction.</p>
+                    </div>
+                    
+                    <div class="slide">
+                        <h3>🎯 Ready to Transform?</h3>
+                        <p>See how your business website looks as an intelligent GPTsite. Start your free trial and experience the future of customer engagement.</p>
+                        <div style="margin-top: 2rem;">
+                            <a href="/signup" class="btn-secondary">Start Your Free Trial</a>
+                        </div>
+
+<!-- Enhanced Interactive Chat Demo Section -->
+<div class="slide chat-demo-slide">
+    <h3 class="text-3xl font-bold mb-6 text-gray-900">💬 Interactive GPTsite Demo</h3>
+    <div class="chat-demo-container" id="chatDemo">
+        <div class="chat-header">
+            <h4 class="text-xl font-semibold" id="chatTitle">Experience Your GPTsite</h4>
+            <p class="text-sm opacity-90">See how visitors interact with your intelligent site</p>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="text-center py-8">
+                <button class="demo-play-button" onclick="startChatDemo()">
+                    <div class="play-triangle"></div>
+                </button>
+                <p class="mt-4 text-gray-600">Click to start live demo</p>
+            </div>
+        </div>
+        <div class="question-buttons" id="questionButtons" style="display: none;">
+            <!-- Questions will be populated by JavaScript based on domain -->
+        </div>
+    </div>
+    <div class="text-center mt-6">
+        <a href="/signup" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition duration-300 shadow-lg transform hover:scale-105">
+            🚀 <span id="ctaText">See How Your Site Looks as a GPTsite</span>
+        </a>
+        <p class="text-sm text-gray-600 mt-2">Free 7-day trial • No credit card required</p>
+    </div>
+</div>
+
+                    </div>
+                </div>
+                
+                <div class="slideshow-nav">
+                    <button class="nav-arrow" onclick="changeSlide(-1)">❮</button>
+                    <button class="nav-arrow" onclick="changeSlide(1)">❯</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section benefits-section">
+        <div class="container">
+            <h2>Why Businesses Choose GPTsite</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3>40% More Leads</h3>
+                    <p>AI captures customer inquiries that would otherwise be lost to confusing navigation and contact forms.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🕐</div>
+                    <h3>24/7 Availability</h3>
+                    <p>Never miss a potential customer inquiry again, even outside business hours or during busy periods.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>Instant Responses</h3>
+                    <p>No more waiting for callbacks - customers get answers immediately when they need them most.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Better Qualification</h3>
+                    <p>AI pre-qualifies leads and routes them to the right team member with context and priority.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">✨</div>
+                    <h3>Professional Image</h3>
+                    <p>Show innovation and commitment to excellent customer service with cutting-edge AI technology.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚀</div>
+                    <h3>Easy Setup</h3>
+                    <p>Goes live in minutes with no technical expertise required. We handle the conversion process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Business Website?</h2>
+            <p>Join thousands of businesses providing better customer service with GPTsite</p>
+            
+            <div class="trial-features">
+                <div class="trial-feature">
+                    <span>✅</span>
+                    <span>Free 7-day trial</span>
+                </div>
+                <div class="trial-feature">
+                    <span>✅</span>
+                    <span>No credit card required</span>
+                </div>
+                <div class="trial-feature">
+                    <span>✅</span>
+                    <span>Cancel anytime</span>
+                </div>
+            </div>
+            
+            <a href="/signup" class="btn-secondary" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">Start Your Free Trial Today</a>
+        </div>
+    </section>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+        
+        // Auto-advance slides
+        setInterval(() => {
+            changeSlide(1);
+        }, 8000);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    
+        
+        // Mobile-specific fixes for chat demo
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+        
+        // Ensure chat demo is visible on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            if (isMobile()) {
+                const chatDemoSlide = document.querySelector('.chat-demo-slide');
+                if (chatDemoSlide) {
+                    chatDemoSlide.style.display = 'block';
+                    chatDemoSlide.style.visibility = 'visible';
+                }
+                
+                // Ensure slideshow navigation works on mobile
+                const slideNavs = document.querySelectorAll('.slide-nav');
+                slideNavs.forEach(nav => {
+                    nav.style.display = 'block';
+                    nav.style.visibility = 'visible';
+                });
+                
+                // Ensure slide indicators work on mobile
+                const indicators = document.querySelectorAll('.indicator');
+                indicators.forEach(indicator => {
+                    indicator.style.display = 'block';
+                    indicator.style.visibility = 'visible';
+                });
+            }
+        });
+        
+</script>
+
+<script>
+// Domain-specific chat demo configurations
+const domainConfigs = {
+    'edgpt.ai': {
+        title: 'Riverside Elementary School EdGPT',
+        greeting: 'Hi! Welcome to Riverside Elementary. I\'m your school\'s EdGPT assistant. How can I help you today?',
+        questions: [
+            'What are your school hours?',
+            'How do I enroll my child?',
+            'What\'s for lunch today?',
+            'When is the next parent meeting?'
+        ],
+        answers: [
+            'Our school hours are 8:00 AM to 3:30 PM, Monday through Friday. Early drop-off is available starting at 7:30 AM, and after-school care runs until 6:00 PM.',
+            'You can enroll your child by visiting our main office with birth certificate, immunization records, and proof of residence. Online pre-registration is also available on our website.',
+            'Today\'s lunch includes chicken nuggets, mac and cheese, fresh fruit, and milk. We also have a vegetarian option with veggie burgers. All meals meet USDA nutrition standards.',
+            'Our next PTA meeting is Thursday, March 15th at 7:00 PM in the school library. We\'ll be discussing the spring fundraiser and upcoming field trips.'
+        ],
+        cta: 'See How Your School\'s Website Looks in EdGPT',
+        colors: {
+            primary: '#3B82F6',
+            secondary: '#1E40AF'
+        }
+    },
+    'gptsites.ai': {
+        title: 'Your Business GPTsite Demo',
+        greeting: 'Hello! Welcome to our business. I\'m your intelligent assistant. How can I help you today?',
+        questions: [
+            'Do you offer website design services?',
+            'What are your pricing options?',
+            'How long does it take to build a website?',
+            'Do you provide ongoing maintenance?'
+        ],
+        answers: [
+            'Yes, we provide custom website design, development, and digital marketing services. Our packages include responsive design, SEO optimization, and ongoing support. Would you like to see our portfolio?',
+            'Our packages start at $2,500 for basic websites and $5,000+ for e-commerce solutions. We offer payment plans and can schedule a consultation to discuss your specific needs and budget.',
+            'Typical websites take 4-8 weeks from start to launch. This includes design, development, content creation, and testing. Rush projects can be accommodated for an additional fee.',
+            'Absolutely! We offer monthly maintenance plans starting at $150/month, including security updates, backups, content updates, and technical support.'
+        ],
+        cta: 'Transform Your Business Website Into a GPTsite',
+        colors: {
+            primary: '#7C3AED',
+            secondary: '#0D9488'
+        }
+    },
+    'lawfirmgpt.ai': {
+        title: 'Law Firm GPTsite Demo',
+        greeting: 'Welcome to our law firm. I\'m here to help answer your legal questions and connect you with our attorneys. How may I assist you?',
+        questions: [
+            'I was injured in a car accident. Do I have a case?',
+            'How long do I have to file a lawsuit?',
+            'What are your legal fees?',
+            'Can you help with my divorce?'
+        ],
+        answers: [
+            'Based on your description, you may have grounds for a personal injury claim. We\'ll need to review the accident details, medical records, and insurance information to assess your case strength. Would you like to schedule a free consultation?',
+            'In most states, the statute of limitations for personal injury cases is 2-3 years from the date of the accident. It\'s important to act quickly to preserve evidence and witness testimony.',
+            'We work on a contingency fee basis for personal injury cases, meaning you pay nothing unless we win your case. Our fee is typically 33-40% of the settlement or judgment.',
+            'Yes, we handle family law matters including divorce, child custody, and property division. We offer both collaborative and litigation approaches depending on your situation.'
+        ],
+        cta: 'Transform Your Law Firm Website Into a GPTsite',
+        colors: {
+            primary: '#1E3A8A',
+            secondary: '#D97706'
+        }
+    },
+    'cpafirm.ai': {
+        title: 'CPA Firm GPTsite Demo',
+        greeting: 'Hello! Welcome to our accounting firm. I\'m here to help with your tax and accounting questions. How can I assist you today?',
+        questions: [
+            'Can I deduct my home office expenses?',
+            'When are quarterly tax payments due?',
+            'Should I incorporate my business?',
+            'What records should I keep for taxes?'
+        ],
+        answers: [
+            'Yes, if you use part of your home exclusively for business, you can deduct home office expenses. You can choose between the simplified method ($5 per square foot, up to 300 sq ft) or actual expense method.',
+            'Quarterly estimated tax payments for 2024 are due: Q1 - April 15, Q2 - June 17, Q3 - September 16, Q4 - January 15, 2025. Missing payments may result in penalties.',
+            'Incorporation depends on your business size, liability concerns, and tax situation. LLCs offer flexibility and protection, while S-Corps can provide tax savings for profitable businesses.',
+            'Keep receipts for all business expenses, bank statements, invoices, payroll records, and previous tax returns for at least 7 years. Digital storage is acceptable for most documents.'
+        ],
+        cta: 'Transform Your Accounting Firm Website Into a GPTsite',
+        colors: {
+            primary: '#065F46',
+            secondary: '#D97706'
+        }
+    },
+    'taxprepgpt.ai': {
+        title: 'Tax Preparation GPTsite Demo',
+        greeting: 'Welcome to our tax preparation service! I\'m here to help with your tax questions and guide you through the process. How can I help?',
+        questions: [
+            'I just got married. How does this affect my taxes?',
+            'Can I still contribute to my IRA?',
+            'What tax documents do I need?',
+            'When will I get my tax refund?'
+        ],
+        answers: [
+            'Congratulations! Marriage can significantly impact your taxes. You can now file jointly or separately. Joint filing often provides better tax benefits, including higher standard deductions and access to more tax credits.',
+            'Yes, for 2024 you can contribute up to $7,000 to a traditional or Roth IRA ($8,000 if you\'re 50 or older). Income limits may apply for Roth IRAs and deductible traditional IRA contributions.',
+            'You\'ll need W-2s from employers, 1099s for other income, receipts for deductions, previous year\'s tax return, and bank account information for direct deposit of your refund.',
+            'E-filed returns with direct deposit typically receive refunds within 21 days. Paper returns take 6-8 weeks. You can track your refund status on the IRS website using your SSN and refund amount.'
+        ],
+        cta: 'Transform Your Tax Preparation Website Into a GPTsite',
+        colors: {
+            primary: '#1E40AF',
+            secondary: '#EA580C'
+        }
+    },
+    'businessbrokergpt.ai': {
+        title: 'Business Brokerage GPTsite Demo',
+        greeting: 'Welcome to our business brokerage firm. I\'m here to help with buying or selling businesses. How can I assist you today?',
+        questions: [
+            'I\'m thinking of selling my business. What\'s it worth?',
+            'How long does the sale process take?',
+            'What information do buyers need?',
+            'Should I tell my employees about the sale?'
+        ],
+        answers: [
+            'Business valuations typically range from 3-6x EBITDA for most companies, depending on factors like market position, growth trends, and operational efficiency. I\'ll need to review your financials to provide a more accurate estimate.',
+            'The typical business sale process takes 6-12 months from listing to closing. This includes preparation, marketing, due diligence, and negotiations. Proper preparation can significantly reduce this timeline.',
+            'Buyers typically require 3-5 years of financial statements, tax returns, customer contracts, employee agreements, equipment lists, and operational procedures. We help prepare a comprehensive information package.',
+            'This depends on your situation. Many owners wait until a letter of intent is signed to minimize disruption. We can help you develop a communication strategy that protects your business during the process.'
+        ],
+        cta: 'Transform Your Business Brokerage Website Into a GPTsite',
+        colors: {
+            primary: '#374151',
+            secondary: '#D97706'
+        }
+    }
+};
+
+// Chat demo variables
+let chatDemoStarted = false;
+let questionCount = 0;
+let maxQuestions = 4;
+let currentConfig = null;
+
+// Initialize chat demo based on current domain
+function initializeChatDemo() {
+    const hostname = window.location.hostname;
+    currentConfig = domainConfigs[hostname] || domainConfigs['gptsites.ai'];
+    
+    // Update UI elements
+    const chatTitle = document.getElementById('chatTitle');
+    const ctaText = document.getElementById('ctaText');
+    
+    if (chatTitle) chatTitle.textContent = currentConfig.title;
+    if (ctaText) ctaText.textContent = currentConfig.cta;
+    
+    // Set CSS custom properties for colors
+    document.documentElement.style.setProperty('--primary-color', currentConfig.colors.primary);
+    document.documentElement.style.setProperty('--secondary-color', currentConfig.colors.secondary);
+    
+    // Populate question buttons
+    const questionButtons = document.getElementById('questionButtons');
+    if (questionButtons) {
+        questionButtons.innerHTML = '';
+        currentConfig.questions.forEach((question, index) => {
+            const button = document.createElement('button');
+            button.className = 'question-btn';
+            button.textContent = question;
+            button.onclick = () => askQuestion(index);
+            questionButtons.appendChild(button);
+        });
+    }
+}
+
+function startChatDemo() {
+    if (chatDemoStarted) return;
+    
+    chatDemoStarted = true;
+    const messagesContainer = document.getElementById('chatMessages');
+    const questionButtons = document.getElementById('questionButtons');
+    
+    if (!messagesContainer || !questionButtons) return;
+    
+    messagesContainer.innerHTML = '';
+    
+    // Add AI greeting with typing effect
+    setTimeout(() => {
+        addTypingIndicator();
+        setTimeout(() => {
+            removeTypingIndicator();
+            addMessage(currentConfig.greeting, 'ai');
+            questionButtons.style.display = 'grid';
+        }, 2000);
+    }, 500);
+}
+
+function addMessage(text, sender) {
+    const messagesContainer = document.getElementById('chatMessages');
+    if (!messagesContainer) return;
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender}`;
+    
+    const bubbleDiv = document.createElement('div');
+    bubbleDiv.className = 'message-bubble';
+    
+    messageDiv.appendChild(bubbleDiv);
+    messagesContainer.appendChild(messageDiv);
+    
+    // Typing animation
+    let i = 0;
+    const typeInterval = setInterval(() => {
+        bubbleDiv.textContent += text.charAt(i);
+        i++;
+        
+        if (i >= text.length) {
+            clearInterval(typeInterval);
+        }
+        
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }, 30);
+}
+
+function addTypingIndicator() {
+    const messagesContainer = document.getElementById('chatMessages');
+    if (!messagesContainer) return;
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message ai';
+    messageDiv.id = 'typingIndicator';
+    
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'typing-indicator';
+    
+    const dotsDiv = document.createElement('div');
+    dotsDiv.className = 'typing-dots';
+    
+    for (let i = 0; i < 3; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'typing-dot';
+        dotsDiv.appendChild(dot);
+    }
+    
+    typingDiv.appendChild(dotsDiv);
+    messageDiv.appendChild(typingDiv);
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) {
+        indicator.remove();
+    }
+}
+
+function askQuestion(index) {
+    if (questionCount >= maxQuestions) return;
+    
+    const question = currentConfig.questions[index];
+    const answer = currentConfig.answers[index];
+    
+    // Disable the clicked button
+    const buttons = document.querySelectorAll('.question-btn');
+    if (buttons[index]) buttons[index].disabled = true;
+    
+    // Add user question
+    addMessage(question, 'user');
+    
+    // Add typing indicator
+    setTimeout(() => {
+        addTypingIndicator();
+        
+        // Add AI response after delay
+        setTimeout(() => {
+            removeTypingIndicator();
+            addMessage(answer, 'ai');
+            questionCount++;
+            
+            // After 4 questions, show final CTA
+            if (questionCount >= maxQuestions) {
+                setTimeout(() => {
+                    addTypingIndicator();
+                    setTimeout(() => {
+                        removeTypingIndicator();
+                        addMessage("I hope this demo shows how a GPTsite can help your business! Ready to transform your website?", 'ai');
+                        
+                        // Add CTA button
+                        setTimeout(() => {
+                            const messagesContainer = document.getElementById('chatMessages');
+                            if (messagesContainer) {
+                                const ctaDiv = document.createElement('div');
+                                ctaDiv.className = 'text-center mt-4';
+                                ctaDiv.innerHTML = `<a href="/signup" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition duration-300 transform hover:scale-105">🚀 ${currentConfig.cta}</a>`;
+                                messagesContainer.appendChild(ctaDiv);
+                                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                            }
+                        }, 1000);
+                    }, 1500);
+                }, 2000);
+            }
+        }, 2500);
+    }, 1000);
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', initializeChatDemo);
+
+        
+        // Mobile-specific fixes for chat demo
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+        
+        // Ensure chat demo is visible on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            if (isMobile()) {
+                const chatDemoSlide = document.querySelector('.chat-demo-slide');
+                if (chatDemoSlide) {
+                    chatDemoSlide.style.display = 'block';
+                    chatDemoSlide.style.visibility = 'visible';
+                }
+                
+                // Ensure slideshow navigation works on mobile
+                const slideNavs = document.querySelectorAll('.slide-nav');
+                slideNavs.forEach(nav => {
+                    nav.style.display = 'block';
+                    nav.style.visibility = 'visible';
+                });
+                
+                // Ensure slide indicators work on mobile
+                const indicators = document.querySelectorAll('.indicator');
+                indicators.forEach(indicator => {
+                    indicator.style.display = 'block';
+                    indicator.style.visibility = 'visible';
+                });
+            }
+        });
+        
+</script>
+
+</body>
+</html>
+

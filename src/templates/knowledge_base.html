@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Base - EdGPT Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            color: #4a5568;
+            font-size: 28px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .back-btn, .add-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .add-btn {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+        
+        .back-btn:hover, .add-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .categories-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            padding: 10px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .category-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .knowledge-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-section {
+            margin-bottom: 40px;
+        }
+        
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .category-title {
+            color: #4a5568;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .category-count {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        
+        .knowledge-item {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .knowledge-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+        
+        .item-type {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .item-type.document {
+            background: #ed8936;
+            color: white;
+        }
+        
+        .item-type.calendar {
+            background: #667eea;
+            color: white;
+        }
+        
+        .item-type.video {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .item-type.transcription {
+            background: #9f7aea;
+            color: white;
+        }
+        
+        .item-type.form {
+            background: #38b2ac;
+            color: white;
+        }
+        
+        .item-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .item-icon.document {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
+        }
+        
+        .item-icon.calendar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        .item-icon.video {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+        
+        .item-icon.transcription {
+            background: linear-gradient(135deg, #9f7aea, #805ad5);
+        }
+        
+        .item-icon.form {
+            background: linear-gradient(135deg, #38b2ac, #319795);
+        }
+        
+        .item-title {
+            color: #4a5568;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            padding-right: 80px;
+        }
+        
+        .item-description {
+            color: #718096;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 12px;
+            color: #a0aec0;
+        }
+        
+        .item-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 12px;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .action-btn.secondary {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+        }
+        
+        .action-btn.warning {
+            background: linear-gradient(135deg, #ed8936, #dd6b20);
+        }
+        
+        .action-btn.danger {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+        }
+        
+        .calendar-preview {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .calendar-event {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .calendar-event:last-child {
+            border-bottom: none;
+        }
+        
+        .event-date {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 12px;
+        }
+        
+        .event-title {
+            color: #4a5568;
+            font-size: 14px;
+        }
+        
+        .video-preview {
+            background: #000;
+            border-radius: 10px;
+            height: 120px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .video-preview:hover {
+            background: #333;
+        }
+        
+        .transcription-preview {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+            border: 1px solid #e2e8f0;
+            max-height: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .transcription-text {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .transcription-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(transparent, white);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #718096;
+        }
+        
+        .empty-state .icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        
+        .empty-state h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #4a5568;
+        }
+        
+        .upload-area {
+            border: 2px dashed #cbd5e0;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .upload-area:hover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .categories-nav {
+                flex-direction: column;
+            }
+            
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .item-title {
+                padding-right: 0;
+                margin-bottom: 25px;
+            }
+            
+            .item-type {
+                position: static;
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🧠 Knowledge Base</h1>
+            <div class="header-actions">
+                <a href="/dashboard" class="back-btn">
+                    ← Back to Dashboard
+                </a>
+                <button class="add-btn" onclick="addNewContent()">
+                    ➕ Add Content
+                </button>
+            </div>
+        </div>
+        
+        <!-- Categories Navigation -->
+        <div class="categories-nav">
+            <button class="category-btn active" onclick="showCategory('all')">
+                📚 All Content
+            </button>
+            <button class="category-btn" onclick="showCategory('documents')">
+                📄 Documents
+            </button>
+            <button class="category-btn" onclick="showCategory('calendars')">
+                📅 Calendars
+            </button>
+            <button class="category-btn" onclick="showCategory('videos')">
+                🎥 Videos
+            </button>
+            <button class="category-btn" onclick="showCategory('transcriptions')">
+                📝 Transcriptions
+            </button>
+            <button class="category-btn" onclick="showCategory('forms')">
+                📋 Forms
+            </button>
+        </div>
+        
+        <!-- Knowledge Content -->
+        <div class="knowledge-content">
+            <!-- Documents Section -->
+            <div class="category-section" data-category="documents">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        📄 Documents
+                        <span class="category-count">3</span>
+                    </h2>
+                </div>
+                
+                <div class="items-grid">
+                    <div class="knowledge-item">
+                        <div class="item-type document">Document</div>
+                        <div class="item-icon document">📄</div>
+                        <h3 class="item-title">Student Handbook 2024-2025</h3>
+                        <p class="item-description">Complete policies, procedures, and guidelines for students and parents</p>
+                        <div class="item-meta">
+                            <span>Updated: March 1, 2025</span>
+                            <span>Size: 2.4 MB</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn">👁️ View</button>
+                            <button class="action-btn secondary">📥 Download</button>
+                            <button class="action-btn warning">✏️ Edit</button>
+                            <button class="action-btn danger">🗑️ Delete</button>
+                        </div>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="item-type document">Document</div>
+                        <div class="item-icon document">📋</div>
+                        <h3 class="item-title">Emergency Procedures</h3>
+                        <p class="item-description">Safety protocols and emergency contact information</p>
+                        <div class="item-meta">
+                            <span>Updated: February 15, 2025</span>
+                            <span>Size: 1.2 MB</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn">👁️ View</button>
+                            <button class="action-btn secondary">📥 Download</button>
+                            <button class="action-btn warning">✏️ Edit</button>
+                            <button class="action-btn danger">🗑️ Delete</button>
+                        </div>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="item-type document">Document</div>
+                        <div class="item-icon document">🍎</div>
+                        <h3 class="item-title">Nutrition Guidelines</h3>
+                        <p class="item-description">School meal programs and nutrition standards</p>
+                        <div class="item-meta">
+                            <span>Updated: January 20, 2025</span>
+                            <span>Size: 800 KB</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn">👁️ View</button>
+                            <button class="action-btn secondary">📥 Download</button>
+                            <button class="action-btn warning">✏️ Edit</button>
+                            <button class="action-btn danger">🗑️ Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Calendars Section -->
+            <div class="category-section" data-category="calendars">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        📅 Calendars
+                        <span class="category-count">2</span>
+                    </h2>
+                </div>
+                
+                <div class="items-grid">
+                    <div class="knowledge-item">
+                        <div class="item-type calendar">Calendar</div>
+                        <div class="item-icon calendar">📅</div>
+                        <h3 class="item-title">Academic Calendar 2024-2025</h3>
+                        <p class="item-description">Complete academic year schedule with holidays and important dates</p>
+                        <div class="calendar-preview">
+                            <div class="calendar-event">
+                                <span class="event-date">Mar 15-17</span>
+                                <span class="event-title">Parent-Teacher Conferences</span>
+                            </div>
+                            <div class="calendar-event">
+                                <span class="event-date">Mar 22</span>
+                                <span class="event-title">Spring Science Fair</span>
+                            </div>
+                            <div class="calendar-event">
+                                <span class="event-date">Apr 5</span>
+                                <span class="event-title">Field Day</span>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn">📅 View Calendar</button>
+                            <button class="action-btn secondary">🔗 Get Link</button>
+                            <button class="action-btn warning">✏️ Edit</button>
+                        </div>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="item-type calendar">Calendar</div>
+                        <div class="item-icon calendar">🏃</div>
+                        <h3 class="item-title">Sports & Activities Calendar</h3>
+                        <p class="item-description">Athletic events and extracurricular activity schedules</p>
+                        <div class="calendar-preview">
+                            <div class="calendar-event">
+                                <span class="event-date">Mar 10</span>
+                                <span class="event-title">Basketball Championship</span>
+                            </div>
+                            <div class="calendar-event">
+                                <span class="event-date">Mar 18</span>
+                                <span class="event-title">Drama Club Performance</span>
+                            </div>
+                            <div class="calendar-event">
+                                <span class="event-date">Mar 25</span>
+                                <span class="event-title">Science Olympiad</span>
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn">📅 View Calendar</button>
+                            <button class="action-btn secondary">🔗 Get Link</button>
+                            <button class="action-btn warning">✏️ Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Videos Section -->
+            <div class="category-section" data-category="videos">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        🎥 Videos
+                        <span class="category-count">3</span>
+                    </h2>
+                </div>
+                
+                <div class="items-grid">
+                    <div class="knowledge-item">
+                        <div class="item-type video">Video</div>
+                        <div class="item-icon video">🎥</div>
+                        <h3 class="item-title">Virtual School Tour</h3>
+                        <p class="item-description">Interactive tour of our school facilities and classrooms</p>
+                        <div class="video-preview" onclick="playVideo('school-tour')">
+                            ▶️
+                        </div>
+                        <div class="item-meta">
+                            <span>Duration: 8:45</span>
+                            <span>Views: 1,247</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn">▶️ Play</button>
+                            <button class="action-btn secondary">🔗 Get Link</button>
+                            <button class="action-btn warning">✏️ Edit</button>
+                            <button class="action-btn">📝 Transcribe</button>
+                        </div>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="item-type video">Video</div>
+                        <div class="item-icon video">👨‍🏫</div>
+                        <h3 class="item-title">Principal Welcome Message</h3>
+                        <p class="item-description">Welcome message from Principal Johnson for new families</p>
+                        <div class="video-preview" onclick="playVideo('principal-welcome')">
+                            ▶️
+                        </div>
+                        <div class="item-meta">
+                            <span>Duration: 3:22</span>
+                            <span>Views: 892</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn">▶️ Play</button>
+                            <button class="action-btn secondary">🔗 Get Link</button>
+                            <button class="action-btn warning">✏️ Edit</button>
+                            <button class="action-btn">📝 Transcribe</button>
+                        </div>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="item-type video">Video</div>
+                        <div class="item-icon video">🎓</div>
+                        <h3 class="item-title">Graduation Ceremony 2024</h3>
+                        <p class="item-description">Highlights from our 5th grade graduation ceremony</p>
+                        <div class="video-preview" onclick="playVideo('graduation-2024')">
+                            ▶️
+                        </div>
+                        <div class="item-meta">
+                            <span>Duration: 15:30</span>
+                            <span>Views: 2,156</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn">▶️ Play</button>
+                            <button class="action-btn secondary">🔗 Get Link</button>
+                            <button class="action-btn warning">✏️ Edit</button>
+                            <button class="action-btn">📝 Transcribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Transcriptions Section -->
+            <div class="category-section" data-category="transcriptions">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        📝 Transcriptions
+                        <span class="category-count">2</span>
+                    </h2>
+                </div>
+                
+                <div class="items-grid">
+                    <div class="knowledge-item">
+                        <div class="item-type transcription">Transcription</div>
+                        <div class="item-icon transcription">📝</div>
+                        <h3 class="item-title">Principal Welcome Message Transcript</h3>
+                        <p class="item-description">Full text transcript of Principal Johnson's welcome video</p>
+                        <div class="transcription-preview">
+                            <div class="transcription-text">
+                                Welcome to Riverside Elementary School! I'm Principal Johnson, and I'm excited to share with you what makes our school special. Our dedicated teachers and staff work tirelessly to create a nurturing environment where every child can thrive academically, socially, and emotionally...
+                            </div>
+                            <div class="transcription-fade"></div>
+                        </div>
+                        <div class="item-meta">
+                            <span>Source: Principal Welcome Video</span>
+                            <span>Generated: March 1, 2025</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn">👁️ View Full</button>
+                            <button class="action-btn secondary">📥 Download</button>
+                            <button class="action-btn warning">✏️ Edit</button>
+                            <button class="action-btn">🔍 Search</button>
+                        </div>
+                    </div>
+                    
+                    <div class="knowledge-item">
+                        <div class="item-type transcription">Transcription</div>
+                        <div class="item-icon transcription">🎤</div>
+                        <h3 class="item-title">School Board Meeting Minutes</h3>
+                        <p class="item-description">Transcribed minutes from the February school board meeting</p>
+                        <div class="transcription-preview">
+                            <div class="transcription-text">
+                                The February school board meeting was called to order at 7:00 PM. Board members present included Chair Williams, Vice Chair Davis, and members Thompson, Martinez, and Chen. The meeting began with public comments regarding the proposed budget for the upcoming fiscal year...
+                            </div>
+                            <div class="transcription-fade"></div>
+                        </div>
+                        <div class="item-meta">
+                            <span>Source: Audio Recording</span>
+                            <span>Generated: February 20, 2025</span>
+                        </div>
+                        <div class="item-actions">
+                            <button class="action-btn">👁️ View Full</button>
+                            <button class="action-btn secondary">📥 Download</button>
+                            <button class="action-btn warning">✏️ Edit</button>
+                            <button class="action-btn">🔍 Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Upload Area -->
+            <div class="upload-area" onclick="openUploadDialog()">
+                <div style="font-size: 48px; margin-bottom: 15px; color: #667eea;">📁</div>
+                <h3 style="color: #4a5568; margin-bottom: 10px;">Upload New Content</h3>
+                <p style="color: #718096;">Drag and drop files here or click to browse</p>
+                <p style="color: #a0aec0; font-size: 14px; margin-top: 10px;">
+                    Supported: Documents (PDF, DOC), Videos (MP4, MOV), Audio (MP3, WAV), Calendars (ICS)
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showCategory(category) {
+            // Update active category button
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide category sections
+            const sections = document.querySelectorAll('.category-section');
+            sections.forEach(section => {
+                if (category === 'all') {
+                    section.style.display = 'block';
+                } else {
+                    const sectionCategory = section.dataset.category;
+                    section.style.display = category === sectionCategory ? 'block' : 'none';
+                }
+            });
+        }
+        
+        function addNewContent() {
+            alert('Opening content upload interface...');
+            // In a real implementation, this would open a content upload modal
+        }
+        
+        function openUploadDialog() {
+            alert('Opening file upload dialog...');
+            // In a real implementation, this would open a file picker
+        }
+        
+        function playVideo(videoId) {
+            alert(`Playing video: ${videoId}`);
+            // In a real implementation, this would open a video player modal
+        }
+        
+        // Drag and drop functionality
+        const uploadArea = document.querySelector('.upload-area');
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const files = Array.from(e.dataTransfer.files);
+            console.log('Files dropped:', files);
+            alert(`${files.length} file(s) ready for upload`);
+            // In a real implementation, this would handle file uploads
+        });
+    </script>
+</body>
+</html>
+
