@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPTSites.ai - Transform Your Business Website Into an Intelligent GPTsite</title>
+    <meta name="description" content="Join 1000+ businesses using GPTSites to generate 300-500% more qualified leads, provide 24/7 customer support, and increase conversions with intelligent AI assistance.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e293b;
+            --accent-color: #dc2626;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --text-color: #334155;
+            --text-light: #64748b;
+            --bg-color: #ffffff;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-cta {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .hero-cta {
+            margin-top: 40px;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+            padding: 18px 36px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn-primary:hover {
+            background: #b91c1c;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 16px 34px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Comparison Section */
+        .comparison {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .comparison-item {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .comparison-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .comparison-visual {
+            margin-bottom: 20px;
+            height: 200px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .comparison-problems {
+            list-style: none;
+            text-align: left;
+        }
+
+        .comparison-problems li {
+            padding: 8px 0;
+            color: var(--accent-color);
+        }
+
+        .comparison-benefits {
+            list-style: none;
+            text-align: left;
+        }
+
+        .comparison-benefits li {
+            padding: 8px 0;
+            color: var(--success-color);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .feature-subtitle {
+            font-size: 1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .feature-benefits {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .feature-benefits li {
+            padding: 5px 0;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .feature-result {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--success-color);
+            border-left: 4px solid var(--success-color);
+        }
+
+        /* Business Solutions */
+        .business-solutions {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .solution-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .solution-card h4 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .solution-list {
+            list-style: none;
+        }
+
+        .solution-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .solution-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ROI Section */
+        .roi-section {
+            padding: 80px 0;
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin: 50px 0;
+        }
+
+        .roi-item {
+            text-align: center;
+        }
+
+        .roi-item h4 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .roi-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .testimonial cite {
+            display: block;
+            margin-top: 20px;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .guarantee {
+            margin-top: 30px;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            padding: 5px 0;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .solutions-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roi-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .btn-primary, .btn-secondary {
+                display: block;
+                margin: 10px auto;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 40px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .features, .business-solutions, .roi-section, .cta-section {
+                padding: 60px 0;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .roi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">GPTSites.ai</a>
+            <ul class="nav-menu">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#solutions">Solutions</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#demo">Demo</a></li>
+            </ul>
+            <a href="#demo" class="nav-cta">Start Free Demo</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transform Your Business Website Into an Intelligent GPTsite</h1>
+                <h2>Generate 300-500% more qualified leads with 24/7 AI-powered customer engagement</h2>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500%</span>
+                        <span class="stat-label">More qualified leads</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Customer engagement</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">1000+</span>
+                        <span class="stat-label">Businesses using GPTSites</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">70%</span>
+                        <span class="stat-label">Support cost reduction</span>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#demo" class="btn-primary">Start Your Free Business Demo</a>
+                    <a href="#features" class="btn-secondary">See How It Works</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison">
+        <div class="container">
+            <h2 class="section-title">Traditional Website vs. Intelligent GPTsite</h2>
+            <p class="section-subtitle">See the dramatic difference in customer engagement and lead generation</p>
+            
+            <div class="comparison-grid">
+                <div class="comparison-item">
+                    <h3>Traditional Website</h3>
+                    <div class="comparison-visual">
+                        [Traditional cluttered business website mockup]
+                    </div>
+                    <ul class="comparison-problems">
+                        <li>❌ Static information pages</li>
+                        <li>❌ Limited business hours only</li>
+                        <li>❌ High bounce rates (70%+)</li>
+                        <li>❌ Missed opportunities after hours</li>
+                        <li>❌ No lead qualification</li>
+                        <li>❌ Generic customer experience</li>
+                    </ul>
+                </div>
+                <div class="comparison-item">
+                    <h3>Intelligent GPTsite</h3>
+                    <div class="comparison-visual">
+                        [Clean GPTsite chatbot interface mockup]
+                    </div>
+                    <ul class="comparison-benefits">
+                        <li>✅ Interactive conversations</li>
+                        <li>✅ 24/7 lead generation</li>
+                        <li>✅ High engagement rates (85%+)</li>
+                        <li>✅ Continuous conversions</li>
+                        <li>✅ Intelligent lead qualification</li>
+                        <li>✅ Personalized customer journey</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Businesses Choose GPTSites</h2>
+            <p class="section-subtitle">Join 1000+ businesses using GPTSites to transform their customer engagement and drive unprecedented growth.</p>
+            
+            <div class="features-grid">
+                <!-- Feature 1: 24/7 Lead Generation -->
+                <div class="feature-card">
+                    <span class="feature-icon">🚀</span>
+                    <h3 class="feature-title">Never Miss Another Lead Again</h3>
+                    <h4 class="feature-subtitle">24/7 Intelligent Lead Generation</h4>
+                    <p class="feature-description">Your GPTsite works around the clock, engaging visitors, qualifying prospects, and capturing leads even when you're sleeping. Turn every website visitor into a potential customer.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ 300-500% increase in qualified leads</li>
+                        <li>✅ 24/7 availability for global customers</li>
+                        <li>✅ Instant lead qualification and scoring</li>
+                        <li>✅ Automated follow-up sequences</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> 5x more qualified leads, higher conversion rates, continuous revenue growth</p>
+                </div>
+
+                <!-- Feature 2: Instant Customer Support -->
+                <div class="feature-card">
+                    <span class="feature-icon">💬</span>
+                    <h3 class="feature-title">Provide Instant Expert-Level Support</h3>
+                    <h4 class="feature-subtitle">AI-Powered Customer Service</h4>
+                    <p class="feature-description">Deliver immediate, accurate answers to customer questions with AI that knows your business inside and out. Reduce support costs while improving customer satisfaction.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ 70% reduction in support costs</li>
+                        <li>✅ Instant response to customer inquiries</li>
+                        <li>✅ Consistent, accurate information</li>
+                        <li>✅ Escalation to human agents when needed</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Happier customers, lower costs, improved efficiency</p>
+                </div>
+
+                <!-- Feature 3: AI Sales Assistant -->
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3 class="feature-title">Your Personal AI Sales Team</h3>
+                    <h4 class="feature-subtitle">Intelligent Sales Conversations</h4>
+                    <p class="feature-description">Guide prospects through your sales process with personalized conversations that understand their needs and recommend the perfect solutions.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ 15-25% improvement in conversion rates</li>
+                        <li>✅ Personalized product recommendations</li>
+                        <li>✅ Objection handling and persuasion</li>
+                        <li>✅ Seamless handoff to sales team</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Higher close rates, shorter sales cycles, increased revenue per visitor</p>
+                </div>
+
+                <!-- Feature 4: Appointment Automation -->
+                <div class="feature-card">
+                    <span class="feature-icon">📅</span>
+                    <h3 class="feature-title">Automate Your Entire Booking Process</h3>
+                    <h4 class="feature-subtitle">Smart Scheduling and Calendar Management</h4>
+                    <p class="feature-description">Let customers book appointments, consultations, and services directly through intelligent conversations that check availability and confirm details.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Automated appointment scheduling</li>
+                        <li>✅ Calendar integration and management</li>
+                        <li>✅ Confirmation and reminder systems</li>
+                        <li>✅ Reduced no-shows and cancellations</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Streamlined operations, better time management, increased bookings</p>
+                </div>
+
+                <!-- Feature 5: Business Intelligence -->
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h3 class="feature-title">Advanced Customer Insights and Analytics</h3>
+                    <h4 class="feature-subtitle">Data-Driven Business Intelligence</h4>
+                    <p class="feature-description">Gain deep insights into customer behavior, preferences, and pain points with comprehensive analytics and reporting that drives business decisions.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Real-time customer behavior analytics</li>
+                        <li>✅ Lead source tracking and attribution</li>
+                        <li>✅ Conversion funnel optimization</li>
+                        <li>✅ ROI measurement and reporting</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Better business decisions, optimized marketing spend, improved ROI</p>
+                </div>
+
+                <!-- Feature 6: Multi-Channel Integration -->
+                <div class="feature-card">
+                    <span class="feature-icon">🔗</span>
+                    <h3 class="feature-title">Seamless Business System Integration</h3>
+                    <h4 class="feature-subtitle">Connect Your Entire Tech Stack</h4>
+                    <p class="feature-description">Integrate with your CRM, email marketing, payment systems, and other business tools for a unified customer experience across all touchpoints.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ CRM and marketing automation integration</li>
+                        <li>✅ Payment processing and e-commerce</li>
+                        <li>✅ Email and SMS marketing connections</li>
+                        <li>✅ Third-party app ecosystem</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Unified customer data, streamlined workflows, enhanced productivity</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Solutions -->
+    <section id="solutions" class="business-solutions">
+        <div class="container">
+            <h2 class="section-title">Comprehensive Business Solutions</h2>
+            <p class="section-subtitle">GPTSites adapts to your industry and business model with specialized features</p>
+            
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <h4>Lead Generation & Qualification</h4>
+                    <ul class="solution-list">
+                        <li>Intelligent prospect identification and scoring</li>
+                        <li>Automated lead nurturing sequences</li>
+                        <li>Real-time lead alerts and notifications</li>
+                        <li>Integration with sales CRM systems</li>
+                        <li>Advanced lead analytics and reporting</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <h4>Customer Support & Service</h4>
+                    <ul class="solution-list">
+                        <li>24/7 instant customer support</li>
+                        <li>Knowledge base integration</li>
+                        <li>Ticket creation and management</li>
+                        <li>Escalation to human agents</li>
+                        <li>Customer satisfaction tracking</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <h4>Sales & E-commerce</h4>
+                    <ul class="solution-list">
+                        <li>Product recommendations and upselling</li>
+                        <li>Shopping cart assistance</li>
+                        <li>Payment processing integration</li>
+                        <li>Order tracking and updates</li>
+                        <li>Abandoned cart recovery</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <h4>Appointment & Booking</h4>
+                    <ul class="solution-list">
+                        <li>Automated scheduling and calendar management</li>
+                        <li>Service availability checking</li>
+                        <li>Confirmation and reminder systems</li>
+                        <li>Rescheduling and cancellation handling</li>
+                        <li>Resource and staff allocation</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <h4>Marketing & Engagement</h4>
+                    <ul class="solution-list">
+                        <li>Personalized content delivery</li>
+                        <li>Email and SMS marketing integration</li>
+                        <li>Social media engagement</li>
+                        <li>Customer feedback collection</li>
+                        <li>Loyalty program management</li>
+                    </ul>
+                </div>
+
+                <div class="solution-card">
+                    <h4>Analytics & Intelligence</h4>
+                    <ul class="solution-list">
+                        <li>Real-time performance dashboards</li>
+                        <li>Customer behavior analytics</li>
+                        <li>Conversion tracking and optimization</li>
+                        <li>ROI measurement and reporting</li>
+                        <li>Predictive analytics and insights</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Section -->
+    <section class="roi-section">
+        <div class="container">
+            <h3>Join 1000+ Businesses Already Using GPTSites</h3>
+            
+            <div class="roi-grid">
+                <div class="roi-item">
+                    <h4>500%</h4>
+                    <p>Increase in qualified leads</p>
+                </div>
+                <div class="roi-item">
+                    <h4>70%</h4>
+                    <p>Reduction in support costs</p>
+                </div>
+                <div class="roi-item">
+                    <h4>25%</h4>
+                    <p>Improvement in conversions</p>
+                </div>
+                <div class="roi-item">
+                    <h4>24/7</h4>
+                    <p>Customer engagement</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                "Since implementing GPTSites, our lead generation increased 400% and our customer support costs dropped by 65%. The AI handles 80% of inquiries automatically, allowing our team to focus on closing deals and serving high-value customers."
+                <cite>- Sarah Johnson, CEO, TechStart Solutions</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="demo" class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Business Website?</h2>
+            <p>Join 1000+ businesses already using GPTSites to generate more leads, reduce costs, and increase revenue.</p>
+            
+            <div class="hero-cta">
+                <a href="#" class="btn-primary">Start Your Free Business Demo</a>
+                <a href="#" class="btn-secondary">Schedule Consultation</a>
+            </div>
+            
+            <p class="guarantee">✅ 30-day money-back guarantee • ✅ No setup fees • ✅ Cancel anytime</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>GPTSites.ai</h4>
+                    <p>Transform your business website into an intelligent GPTsite that generates leads and provides customer support 24/7.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="#">24/7 Lead Generation</a></li>
+                        <li><a href="#">AI Customer Support</a></li>
+                        <li><a href="#">Sales Automation</a></li>
+                        <li><a href="#">Appointment Booking</a></li>
+                        <li><a href="#">Business Analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#">E-commerce</a></li>
+                        <li><a href="#">Professional Services</a></li>
+                        <li><a href="#">SaaS Companies</a></li>
+                        <li><a href="#">Local Businesses</a></li>
+                        <li><a href="#">Enterprise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">Sales: (555) 123-4567</a></li>
+                        <li><a href="#">Support: (555) 123-4568</a></li>
+                        <li><a href="#">Email: info@gptsites.ai</a></li>
+                        <li><a href="#">Schedule Demo</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GPTSites.ai. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--bg-color)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .solution-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
+

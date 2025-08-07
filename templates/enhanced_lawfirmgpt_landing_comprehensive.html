@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LawFirmGPT.ai - Transform Your Law Firm Website Into an Intelligent GPTsite</title>
+    <meta name="description" content="Join 200+ law firms using LawFirmGPT to provide 24/7 legal information, qualify high-value cases, and increase client acquisition with intelligent AI assistance.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #0f172a;
+            --accent-color: #dc2626;
+            --gold-color: #d97706;
+            --success-color: #059669;
+            --text-color: #334155;
+            --text-light: #64748b;
+            --bg-color: #ffffff;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-cta {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e40af 0%, #0f172a 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .hero-cta {
+            margin-top: 40px;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+            padding: 18px 36px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn-primary:hover {
+            background: #b91c1c;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--gold-color);
+            padding: 16px 34px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold-color);
+            color: white;
+        }
+
+        /* Practice Areas */
+        .practice-areas {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .practice-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .practice-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .practice-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .practice-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .practice-list {
+            list-style: none;
+            color: var(--text-light);
+        }
+
+        .practice-list li {
+            padding: 5px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .practice-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .feature-subtitle {
+            font-size: 1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .feature-benefits {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .feature-benefits li {
+            padding: 5px 0;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .feature-result {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--success-color);
+            border-left: 4px solid var(--success-color);
+        }
+
+        /* Legal Compliance */
+        .compliance {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .compliance-item {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .compliance-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .compliance-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            padding: 80px 0;
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .social-proof h3 {
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--gold-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .testimonial cite {
+            display: block;
+            margin-top: 20px;
+            font-style: normal;
+            font-weight: 600;
+            color: var(--gold-color);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #1e40af 0%, #0f172a 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .guarantee {
+            margin-top: 30px;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: var(--gold-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            padding: 5px 0;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+            color: var(--gold-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .practice-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .compliance-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .btn-primary, .btn-secondary {
+                display: block;
+                margin: 10px auto;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 40px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .practice-areas, .features, .compliance, .social-proof, .cta-section {
+                padding: 60px 0;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">LawFirmGPT.ai</a>
+            <ul class="nav-menu">
+                <li><a href="#practice-areas">Practice Areas</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#compliance">Compliance</a></li>
+                <li><a href="#demo">Demo</a></li>
+            </ul>
+            <a href="#demo" class="nav-cta">Start Free Demo</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transform Your Law Firm Website Into an Intelligent GPTsite</h1>
+                <h2>Provide 24/7 legal information and qualify high-value cases while maintaining professional compliance</h2>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Legal information access</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">200+</span>
+                        <span class="stat-label">Law firms using LawFirmGPT</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">Client satisfaction rate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">60%</span>
+                        <span class="stat-label">More qualified consultations</span>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#demo" class="btn-primary">Start Your Free Legal Demo</a>
+                    <a href="#practice-areas" class="btn-secondary">See Practice Areas</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Practice Areas -->
+    <section id="practice-areas" class="practice-areas">
+        <div class="container">
+            <h2 class="section-title">Specialized Legal Expertise</h2>
+            <p class="section-subtitle">LawFirmGPT provides intelligent assistance across all major practice areas with professional compliance</p>
+            
+            <div class="practice-grid">
+                <div class="practice-card">
+                    <span class="practice-icon">⚖️</span>
+                    <h3 class="practice-title">Personal Injury Law</h3>
+                    <ul class="practice-list">
+                        <li>Accident assessment and evaluation</li>
+                        <li>Insurance claim guidance</li>
+                        <li>Medical documentation requirements</li>
+                        <li>Statute of limitations information</li>
+                        <li>Case value estimation tools</li>
+                        <li>Expert witness connections</li>
+                    </ul>
+                </div>
+
+                <div class="practice-card">
+                    <span class="practice-icon">👨‍👩‍👧‍👦</span>
+                    <h3 class="practice-title">Family Law</h3>
+                    <ul class="practice-list">
+                        <li>Divorce process information</li>
+                        <li>Child custody guidelines</li>
+                        <li>Support calculation guidance</li>
+                        <li>Mediation services</li>
+                        <li>Property division assistance</li>
+                        <li>Adoption procedures</li>
+                    </ul>
+                </div>
+
+                <div class="practice-card">
+                    <span class="practice-icon">🏢</span>
+                    <h3 class="practice-title">Business Law</h3>
+                    <ul class="practice-list">
+                        <li>Contract review and drafting</li>
+                        <li>Business formation guidance</li>
+                        <li>Employment law compliance</li>
+                        <li>Intellectual property protection</li>
+                        <li>Merger and acquisition support</li>
+                        <li>Regulatory compliance</li>
+                    </ul>
+                </div>
+
+                <div class="practice-card">
+                    <span class="practice-icon">🏠</span>
+                    <h3 class="practice-title">Real Estate Law</h3>
+                    <ul class="practice-list">
+                        <li>Property transaction guidance</li>
+                        <li>Title examination services</li>
+                        <li>Zoning and land use issues</li>
+                        <li>Landlord-tenant disputes</li>
+                        <li>Construction law matters</li>
+                        <li>Commercial real estate</li>
+                    </ul>
+                </div>
+
+                <div class="practice-card">
+                    <span class="practice-icon">⚖️</span>
+                    <h3 class="practice-title">Criminal Defense</h3>
+                    <ul class="practice-list">
+                        <li>Rights and procedures explanation</li>
+                        <li>Bail and bond information</li>
+                        <li>Plea bargain guidance</li>
+                        <li>Court process navigation</li>
+                        <li>Evidence evaluation</li>
+                        <li>Sentencing guidelines</li>
+                    </ul>
+                </div>
+
+                <div class="practice-card">
+                    <span class="practice-icon">📋</span>
+                    <h3 class="practice-title">Estate Planning</h3>
+                    <ul class="practice-list">
+                        <li>Will and trust creation</li>
+                        <li>Probate process guidance</li>
+                        <li>Tax planning strategies</li>
+                        <li>Power of attorney documents</li>
+                        <li>Healthcare directives</li>
+                        <li>Asset protection planning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Law Firms Choose LawFirmGPT</h2>
+            <p class="section-subtitle">Join 200+ law firms using LawFirmGPT to provide professional legal assistance while maintaining ethical compliance.</p>
+            
+            <div class="features-grid">
+                <!-- Feature 1: 24/7 Legal Information -->
+                <div class="feature-card">
+                    <span class="feature-icon">🕐</span>
+                    <h3 class="feature-title">24/7 Legal Information Access</h3>
+                    <h4 class="feature-subtitle">Always-Available Legal Guidance</h4>
+                    <p class="feature-description">Provide potential clients with immediate access to legal information, procedures, and guidance around the clock, establishing your firm as a trusted resource.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Instant legal information delivery</li>
+                        <li>✅ Professional compliance maintained</li>
+                        <li>✅ Ethical guidelines adherence</li>
+                        <li>✅ Clear attorney-client disclaimers</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Enhanced client trust, professional reputation, 24/7 accessibility</p>
+                </div>
+
+                <!-- Feature 2: Client Qualification -->
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3 class="feature-title">Intelligent Case Qualification</h3>
+                    <h4 class="feature-subtitle">Identify High-Value Cases</h4>
+                    <p class="feature-description">Automatically assess potential cases, identify high-value opportunities, and prioritize consultations based on case merit and firm expertise.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Automated case assessment</li>
+                        <li>✅ High-value case identification</li>
+                        <li>✅ Practice area matching</li>
+                        <li>✅ Consultation prioritization</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Better case selection, higher success rates, increased revenue</p>
+                </div>
+
+                <!-- Feature 3: Professional Compliance -->
+                <div class="feature-card">
+                    <span class="feature-icon">📜</span>
+                    <h3 class="feature-title">Built-in Ethical Compliance</h3>
+                    <h4 class="feature-subtitle">Professional Standards Maintained</h4>
+                    <p class="feature-description">Ensure all interactions meet professional ethical standards with built-in disclaimers, confidentiality protections, and bar association compliance.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Automatic ethical disclaimers</li>
+                        <li>✅ Confidentiality protection</li>
+                        <li>✅ Bar association compliance</li>
+                        <li>✅ Professional liability protection</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Risk mitigation, professional protection, ethical practice</p>
+                </div>
+
+                <!-- Feature 4: Consultation Scheduling -->
+                <div class="feature-card">
+                    <span class="feature-icon">📅</span>
+                    <h3 class="feature-title">Automated Consultation Booking</h3>
+                    <h4 class="feature-subtitle">Streamlined Client Intake</h4>
+                    <p class="feature-description">Allow potential clients to schedule consultations directly through intelligent conversations that gather necessary information and check attorney availability.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Automated scheduling system</li>
+                        <li>✅ Client intake information gathering</li>
+                        <li>✅ Attorney availability checking</li>
+                        <li>✅ Confirmation and reminder systems</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Streamlined intake, better preparation, increased consultations</p>
+                </div>
+
+                <!-- Feature 5: Practice Area Expertise -->
+                <div class="feature-card">
+                    <span class="feature-icon">🎓</span>
+                    <h3 class="feature-title">Demonstrate Legal Expertise</h3>
+                    <h4 class="feature-subtitle">Showcase Specialized Knowledge</h4>
+                    <p class="feature-description">Display your firm's expertise across practice areas with intelligent responses that demonstrate deep legal knowledge and experience.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Practice area specialization display</li>
+                        <li>✅ Legal knowledge demonstration</li>
+                        <li>✅ Case study integration</li>
+                        <li>✅ Attorney credential highlighting</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Enhanced credibility, client confidence, competitive advantage</p>
+                </div>
+
+                <!-- Feature 6: Client Communication -->
+                <div class="feature-card">
+                    <span class="feature-icon">💬</span>
+                    <h3 class="feature-title">Professional Client Communication</h3>
+                    <h4 class="feature-subtitle">Maintain Client Relationships</h4>
+                    <p class="feature-description">Provide ongoing communication with existing clients about case updates, legal developments, and firm news while maintaining confidentiality.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Secure client communication</li>
+                        <li>✅ Case update notifications</li>
+                        <li>✅ Legal development alerts</li>
+                        <li>✅ Confidentiality maintenance</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Improved client satisfaction, stronger relationships, referral generation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Legal Compliance -->
+    <section id="compliance" class="compliance">
+        <div class="container">
+            <h2 class="section-title">Professional Legal Compliance</h2>
+            <p class="section-subtitle">LawFirmGPT maintains the highest standards of legal ethics and professional responsibility</p>
+            
+            <div class="compliance-grid">
+                <div class="compliance-item">
+                    <h4>Attorney-Client Privilege</h4>
+                    <p>Secure communication channels with encryption and confidentiality protections for all client interactions.</p>
+                </div>
+
+                <div class="compliance-item">
+                    <h4>Ethical Disclaimers</h4>
+                    <p>Automatic inclusion of appropriate disclaimers about attorney-client relationships and legal advice limitations.</p>
+                </div>
+
+                <div class="compliance-item">
+                    <h4>Bar Association Compliance</h4>
+                    <p>Full compliance with state bar association rules and regulations for legal advertising and client communication.</p>
+                </div>
+
+                <div class="compliance-item">
+                    <h4>Professional Liability Protection</h4>
+                    <p>Built-in safeguards to protect against professional liability issues and maintain ethical standards.</p>
+                </div>
+
+                <div class="compliance-item">
+                    <h4>Conflict of Interest Screening</h4>
+                    <p>Automated screening processes to identify potential conflicts of interest before client engagement.</p>
+                </div>
+
+                <div class="compliance-item">
+                    <h4>Data Security & Privacy</h4>
+                    <p>Enterprise-grade security measures to protect sensitive client information and maintain confidentiality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <h3>Join 200+ Law Firms Already Using LawFirmGPT</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4>60%</h4>
+                    <p>More qualified consultations</p>
+                </div>
+                <div class="stat-item">
+                    <h4>24/7</h4>
+                    <p>Legal information access</p>
+                </div>
+                <div class="stat-item">
+                    <h4>85%</h4>
+                    <p>Client satisfaction rate</p>
+                </div>
+                <div class="stat-item">
+                    <h4>100%</h4>
+                    <p>Ethical compliance maintained</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                "LawFirmGPT has transformed how we connect with potential clients. We're providing valuable legal information 24/7 while maintaining full ethical compliance. Our consultation bookings increased 60% and client satisfaction scores are at an all-time high."
+                <cite>- Michael Rodriguez, Managing Partner, Rodriguez & Associates</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="demo" class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Law Firm's Client Engagement?</h2>
+            <p>Join 200+ law firms already using LawFirmGPT to provide professional legal assistance while maintaining ethical compliance.</p>
+            
+            <div class="hero-cta">
+                <a href="#" class="btn-primary">Start Your Free Legal Demo</a>
+                <a href="#" class="btn-secondary">Schedule Consultation</a>
+            </div>
+            
+            <p class="guarantee">✅ 30-day money-back guarantee • ✅ Full ethical compliance • ✅ Professional support</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>LawFirmGPT.ai</h4>
+                    <p>Transform your law firm website into an intelligent GPTsite that provides 24/7 legal information while maintaining professional compliance.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Practice Areas</h4>
+                    <ul>
+                        <li><a href="#">Personal Injury</a></li>
+                        <li><a href="#">Family Law</a></li>
+                        <li><a href="#">Business Law</a></li>
+                        <li><a href="#">Real Estate</a></li>
+                        <li><a href="#">Criminal Defense</a></li>
+                        <li><a href="#">Estate Planning</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="#">24/7 Legal Information</a></li>
+                        <li><a href="#">Case Qualification</a></li>
+                        <li><a href="#">Ethical Compliance</a></li>
+                        <li><a href="#">Consultation Booking</a></li>
+                        <li><a href="#">Client Communication</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">Sales: (555) 123-4567</a></li>
+                        <li><a href="#">Support: (555) 123-4568</a></li>
+                        <li><a href="#">Email: info@lawfirmgpt.ai</a></li>
+                        <li><a href="#">Schedule Demo</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LawFirmGPT.ai. All rights reserved. | Privacy Policy | Terms of Service | Legal Disclaimers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--bg-color)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Animate cards on scroll
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.practice-card, .feature-card, .compliance-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
+

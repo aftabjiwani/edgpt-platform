@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPAFirm.ai - Transform Your Accounting Firm Website Into an Intelligent GPTsite</title>
+    <meta name="description" content="Join 150+ CPA firms using CPAFirm.ai to provide 365-day tax support, expand advisory services, and increase client retention with intelligent AI assistance.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #059669;
+            --secondary-color: #0f172a;
+            --accent-color: #dc2626;
+            --blue-color: #2563eb;
+            --success-color: #10b981;
+            --text-color: #334155;
+            --text-light: #64748b;
+            --bg-color: #ffffff;
+            --bg-light: #f0fdf4;
+            --border-color: #d1fae5;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-cta {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-cta:hover {
+            background: #047857;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fbbf24;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .hero-cta {
+            margin-top: 40px;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+            padding: 18px 36px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn-primary:hover {
+            background: #b91c1c;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid #fbbf24;
+            padding: 16px 34px;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #fbbf24;
+            color: var(--secondary-color);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-tabs {
+            margin-bottom: 40px;
+        }
+
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: white;
+            border: 2px solid var(--border-color);
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            color: var(--text-color);
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-item {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .service-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-item h4 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .service-item p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .feature-subtitle {
+            font-size: 1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .feature-benefits {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .feature-benefits li {
+            padding: 5px 0;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .feature-result {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--success-color);
+            border-left: 4px solid var(--success-color);
+        }
+
+        /* Industry Expertise */
+        .industry-expertise {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .expertise-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .expertise-card h4 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .expertise-list {
+            list-style: none;
+        }
+
+        .expertise-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .expertise-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Social Proof */
+        .social-proof {
+            padding: 80px 0;
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .social-proof h3 {
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fbbf24;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            font-style: italic;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .testimonial cite {
+            display: block;
+            margin-top: 20px;
+            font-style: normal;
+            font-weight: 600;
+            color: #fbbf24;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .guarantee {
+            margin-top: 30px;
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            color: #fbbf24;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            padding: 5px 0;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+            color: #fbbf24;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .tab-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tab-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .btn-primary, .btn-secondary {
+                display: block;
+                margin: 10px auto;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 40px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .services, .features, .industry-expertise, .social-proof, .cta-section {
+                padding: 60px 0;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="#" class="logo">CPAFirm.ai</a>
+            <ul class="nav-menu">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#demo">Demo</a></li>
+            </ul>
+            <a href="#demo" class="nav-cta">Start Free Demo</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transform Your Accounting Firm Website Into an Intelligent GPTsite</h1>
+                <h2>Provide 365-day tax support and expand advisory services while increasing client retention</h2>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">365</span>
+                        <span class="stat-label">Days of tax support</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">CPA firms using CPAFirm.ai</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">40%</span>
+                        <span class="stat-label">Increase in advisory revenue</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">90%</span>
+                        <span class="stat-label">Client retention rate</span>
+                    </div>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#demo" class="btn-primary">Start Your Free CPA Demo</a>
+                    <a href="#services" class="btn-secondary">See Our Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Comprehensive Accounting Services</h2>
+            <p class="section-subtitle">CPAFirm.ai provides intelligent assistance across all areas of accounting and financial services</p>
+            
+            <div class="services-tabs">
+                <div class="tab-nav">
+                    <button class="tab-btn active" onclick="showTab('tax-services')">Tax Services</button>
+                    <button class="tab-btn" onclick="showTab('business-accounting')">Business Accounting</button>
+                    <button class="tab-btn" onclick="showTab('advisory-services')">Advisory Services</button>
+                    <button class="tab-btn" onclick="showTab('compliance')">Compliance</button>
+                </div>
+
+                <div id="tax-services" class="tab-content active">
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <h4>Individual Tax Preparation</h4>
+                            <p>Personal income tax preparation and planning with year-round support</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Business Tax Solutions</h4>
+                            <p>Corporate, partnership, and LLC tax services with strategic planning</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Tax Planning & Strategy</h4>
+                            <p>Proactive tax planning to minimize liability and maximize savings</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>IRS Representation</h4>
+                            <p>Professional representation for audits, appeals, and tax disputes</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Estate & Trust Taxes</h4>
+                            <p>Specialized tax services for estates, trusts, and gift tax planning</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Multi-State Tax Services</h4>
+                            <p>Complex multi-state tax compliance and planning solutions</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="business-accounting" class="tab-content">
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <h4>Bookkeeping Services</h4>
+                            <p>Monthly bookkeeping and financial statement preparation</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Payroll Processing</h4>
+                            <p>Complete payroll services with tax compliance and reporting</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Financial Statement Preparation</h4>
+                            <p>Compiled, reviewed, and audited financial statements</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>QuickBooks Setup & Training</h4>
+                            <p>Accounting software implementation and staff training</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Cash Flow Management</h4>
+                            <p>Cash flow analysis and working capital optimization</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Business Entity Formation</h4>
+                            <p>Entity selection and formation services for new businesses</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="advisory-services" class="tab-content">
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <h4>Business Consulting</h4>
+                            <p>Strategic business advice and operational improvement consulting</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Financial Planning</h4>
+                            <p>Personal and business financial planning and investment advice</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Succession Planning</h4>
+                            <p>Business succession and exit strategy planning services</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Merger & Acquisition Support</h4>
+                            <p>Due diligence and transaction support for M&A activities</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Budgeting & Forecasting</h4>
+                            <p>Financial budgeting, forecasting, and variance analysis</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Risk Management</h4>
+                            <p>Business risk assessment and mitigation strategies</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="compliance" class="tab-content">
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <h4>Sales Tax Compliance</h4>
+                            <p>Multi-state sales tax registration, filing, and compliance</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Employment Tax Services</h4>
+                            <p>Payroll tax compliance and quarterly reporting</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Regulatory Compliance</h4>
+                            <p>Industry-specific regulatory compliance and reporting</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Non-Profit Accounting</h4>
+                            <p>Specialized accounting services for non-profit organizations</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Government Contracting</h4>
+                            <p>Compliance services for government contractors and grants</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>International Tax</h4>
+                            <p>Cross-border tax compliance and international reporting</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why CPA Firms Choose CPAFirm.ai</h2>
+            <p class="section-subtitle">Join 150+ CPA firms using CPAFirm.ai to expand services, increase revenue, and improve client satisfaction.</p>
+            
+            <div class="features-grid">
+                <!-- Feature 1: Year-Round Tax Information -->
+                <div class="feature-card">
+                    <span class="feature-icon">📅</span>
+                    <h3 class="feature-title">365-Day Tax Information Hub</h3>
+                    <h4 class="feature-subtitle">Beyond Seasonal Tax Preparation</h4>
+                    <p class="feature-description">Provide clients with year-round tax guidance, planning opportunities, and compliance information, transforming your practice from seasonal to year-round revenue generation.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Year-round client engagement</li>
+                        <li>✅ Proactive tax planning opportunities</li>
+                        <li>✅ Continuous revenue generation</li>
+                        <li>✅ Enhanced client relationships</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> 40% increase in annual revenue, stronger client retention</p>
+                </div>
+
+                <!-- Feature 2: Service Matching -->
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3 class="feature-title">Intelligent Service Assessment</h3>
+                    <h4 class="feature-subtitle">Match Clients to Optimal Services</h4>
+                    <p class="feature-description">Automatically assess client needs and recommend appropriate services, from basic bookkeeping to complex advisory services, maximizing revenue per client.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Automated needs assessment</li>
+                        <li>✅ Service upselling opportunities</li>
+                        <li>✅ Personalized service recommendations</li>
+                        <li>✅ Revenue optimization per client</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> 35% increase in service utilization, higher client value</p>
+                </div>
+
+                <!-- Feature 3: Compliance Management -->
+                <div class="feature-card">
+                    <span class="feature-icon">📋</span>
+                    <h3 class="feature-title">Automated Compliance Tracking</h3>
+                    <h4 class="feature-subtitle">Never Miss Important Deadlines</h4>
+                    <p class="feature-description">Keep clients informed about tax deadlines, regulatory changes, and compliance requirements with automated reminders and updates.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Automated deadline reminders</li>
+                        <li>✅ Regulatory change notifications</li>
+                        <li>✅ Compliance calendar integration</li>
+                        <li>✅ Penalty avoidance assistance</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Reduced compliance risks, improved client satisfaction</p>
+                </div>
+
+                <!-- Feature 4: Advisory Services Expansion -->
+                <div class="feature-card">
+                    <span class="feature-icon">💡</span>
+                    <h3 class="feature-title">Expand High-Value Advisory Services</h3>
+                    <h4 class="feature-subtitle">Transform into Trusted Business Advisor</h4>
+                    <p class="feature-description">Position your firm as a strategic business advisor by providing intelligent business consulting, financial planning, and growth strategy guidance.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Business consulting opportunities</li>
+                        <li>✅ Financial planning services</li>
+                        <li>✅ Strategic advisory positioning</li>
+                        <li>✅ Higher-margin service offerings</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> 50% increase in advisory revenue, premium pricing</p>
+                </div>
+
+                <!-- Feature 5: Industry Expertise -->
+                <div class="feature-card">
+                    <span class="feature-icon">🏭</span>
+                    <h3 class="feature-title">Demonstrate Industry Specialization</h3>
+                    <h4 class="feature-subtitle">Showcase Sector-Specific Knowledge</h4>
+                    <p class="feature-description">Display expertise in specific industries like healthcare, construction, retail, or manufacturing with specialized knowledge and compliance requirements.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Industry-specific expertise display</li>
+                        <li>✅ Specialized compliance knowledge</li>
+                        <li>✅ Niche market positioning</li>
+                        <li>✅ Premium service differentiation</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Higher fees, specialized market positioning, referral generation</p>
+                </div>
+
+                <!-- Feature 6: Client Portal Integration -->
+                <div class="feature-card">
+                    <span class="feature-icon">🔗</span>
+                    <h3 class="feature-title">Seamless Client Portal Access</h3>
+                    <h4 class="feature-subtitle">Streamlined Client Experience</h4>
+                    <p class="feature-description">Integrate with existing client portals and practice management systems for seamless document sharing, communication, and service delivery.</p>
+                    <ul class="feature-benefits">
+                        <li>✅ Client portal integration</li>
+                        <li>✅ Document sharing automation</li>
+                        <li>✅ Practice management connectivity</li>
+                        <li>✅ Streamlined workflows</li>
+                    </ul>
+                    <p class="feature-result"><strong>Result:</strong> Improved efficiency, better client experience, reduced administrative time</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industry Expertise -->
+    <section id="expertise" class="industry-expertise">
+        <div class="container">
+            <h2 class="section-title">Industry-Specific Expertise</h2>
+            <p class="section-subtitle">CPAFirm.ai provides specialized knowledge across major business sectors</p>
+            
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <h4>Healthcare & Medical Practices</h4>
+                    <ul class="expertise-list">
+                        <li>Medical practice accounting and tax planning</li>
+                        <li>Healthcare compliance and regulatory requirements</li>
+                        <li>Medical equipment depreciation and financing</li>
+                        <li>Practice valuation and succession planning</li>
+                        <li>HIPAA compliance and data security</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-card">
+                    <h4>Construction & Contractors</h4>
+                    <ul class="expertise-list">
+                        <li>Job costing and project accounting</li>
+                        <li>Prevailing wage compliance</li>
+                        <li>Equipment depreciation and Section 179</li>
+                        <li>Bonding and surety requirements</li>
+                        <li>Multi-state contractor licensing</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-card">
+                    <h4>Retail & E-commerce</h4>
+                    <ul class="expertise-list">
+                        <li>Inventory accounting and valuation</li>
+                        <li>Multi-state sales tax compliance</li>
+                        <li>E-commerce platform integration</li>
+                        <li>Seasonal business planning</li>
+                        <li>Franchise accounting and reporting</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-card">
+                    <h4>Real Estate & Property Management</h4>
+                    <ul class="expertise-list">
+                        <li>Real estate investment accounting</li>
+                        <li>1031 like-kind exchanges</li>
+                        <li>Property management accounting</li>
+                        <li>Depreciation and cost segregation</li>
+                        <li>Real estate professional status</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-card">
+                    <h4>Manufacturing & Distribution</h4>
+                    <ul class="expertise-list">
+                        <li>Cost accounting and inventory management</li>
+                        <li>R&D tax credits and incentives</li>
+                        <li>International trade and customs</li>
+                        <li>Supply chain finance optimization</li>
+                        <li>Manufacturing tax deductions</li>
+                    </ul>
+                </div>
+
+                <div class="expertise-card">
+                    <h4>Professional Services</h4>
+                    <ul class="expertise-list">
+                        <li>Professional practice accounting</li>
+                        <li>Partnership and LLC structures</li>
+                        <li>Professional liability and insurance</li>
+                        <li>Retirement and succession planning</li>
+                        <li>Professional licensing compliance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <h3>Join 150+ CPA Firms Already Using CPAFirm.ai</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4>40%</h4>
+                    <p>Increase in advisory revenue</p>
+                </div>
+                <div class="stat-item">
+                    <h4>365</h4>
+                    <p>Days of client engagement</p>
+                </div>
+                <div class="stat-item">
+                    <h4>90%</h4>
+                    <p>Client retention rate</p>
+                </div>
+                <div class="stat-item">
+                    <h4>35%</h4>
+                    <p>Increase in service utilization</p>
+                </div>
+            </div>
+
+            <div class="testimonial">
+                "CPAFirm.ai transformed our practice from seasonal tax preparation to year-round advisory services. Our advisory revenue increased 45% and client retention improved dramatically. We're now positioned as trusted business advisors, not just tax preparers."
+                <cite>- Jennifer Chen, CPA, Managing Partner, Chen & Associates</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="demo" class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your CPA Practice?</h2>
+            <p>Join 150+ CPA firms already using CPAFirm.ai to expand services, increase revenue, and improve client satisfaction.</p>
+            
+            <div class="hero-cta">
+                <a href="#" class="btn-primary">Start Your Free CPA Demo</a>
+                <a href="#" class="btn-secondary">Schedule Consultation</a>
+            </div>
+            
+            <p class="guarantee">✅ 30-day money-back guarantee • ✅ No setup fees • ✅ Professional support</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>CPAFirm.ai</h4>
+                    <p>Transform your accounting firm website into an intelligent GPTsite that provides 365-day support and expands advisory services.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Tax Services</a></li>
+                        <li><a href="#">Business Accounting</a></li>
+                        <li><a href="#">Advisory Services</a></li>
+                        <li><a href="#">Compliance</a></li>
+                        <li><a href="#">Industry Expertise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Industries</h4>
+                    <ul>
+                        <li><a href="#">Healthcare</a></li>
+                        <li><a href="#">Construction</a></li>
+                        <li><a href="#">Retail & E-commerce</a></li>
+                        <li><a href="#">Real Estate</a></li>
+                        <li><a href="#">Manufacturing</a></li>
+                        <li><a href="#">Professional Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">Sales: (555) 123-4567</a></li>
+                        <li><a href="#">Support: (555) 123-4568</a></li>
+                        <li><a href="#">Email: info@cpafirm.ai</a></li>
+                        <li><a href="#">Schedule Demo</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CPAFirm.ai. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--bg-color)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Animate cards on scroll
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-item, .feature-card, .expertise-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
+
